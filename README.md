@@ -1,2 +1,4 @@
 # LibraryProject
-final project
+혁신성장 청년인재 집중양성 <청년 데이터 과학자 집중양성 과정> 
+파이널 프로젝트
+
