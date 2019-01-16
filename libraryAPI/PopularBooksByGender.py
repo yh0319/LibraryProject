@@ -31,7 +31,7 @@ def main():
 def scrape_list_gender(mainURL, API_KEY, genderGroup, ageGroup):
     for age in ageGroup:
         for gender in genderGroup:
-            url = "{}{}&startDt=2018-8-01&age={}&gender={}".format(mainURL,API_KEY, age, gender)
+            url = "{}{}&startDt=2018-01-01&age={}&gender={}".format(mainURL,API_KEY, age, gender)
             print(url)
             yield url
 
