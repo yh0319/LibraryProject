@@ -7,19 +7,19 @@ import re
 
 def main():
     session = requests.session()
-    
+   
     mainURL = 'http://data4library.kr/api/loanItemSrch?authKey='
-    API_KEY = "f2b79adb5d197d49b9d90cb2a7863b70cb6fac6299e8b94ec804b8749e6e6991"
+    API_KEY = "[API KEY를 입력하세요]"
     ageGroup = ['10', '20', '30', '40', '50', '60', '70']
     genderGroup = ['0','1']
     urls = scrape_list_gender(mainURL, API_KEY, genderGroup, ageGroup)
-
-
+    
     popular_books_list = []
+    
     for url in urls:
         time.sleep(1)
         response = session.get(url)
-        bookInfo = scrape_detail_pgender(response)
+        bookInfo = scrape_detail_gender(response)
         popular_books_list.append(bookInfo)
     
     print(popular_books_list)
@@ -27,7 +27,7 @@ def main():
     with open("PopularBookBygender.json", "w", encoding="utf-8-sig") as f:
         json.dump(popular_books_list, fp=f, ensure_ascii=False, indent=3)
 
-
+# 성별로 인기대출도서 결과 가져오기 위한 url 조합 및 호출
 def scrape_list_gender(mainURL, API_KEY, genderGroup, ageGroup):
     for age in ageGroup:
         for gender in genderGroup:
@@ -35,7 +35,8 @@ def scrape_list_gender(mainURL, API_KEY, genderGroup, ageGroup):
             print(url)
             yield url
 
-def scrape_detail_pgender(response):
+# 도서 정보 스크레핑
+def scrape_detail_gender(response):
     try:
         soup = BeautifulSoup(response.text, 'html.parser')
         bookInfo = []
