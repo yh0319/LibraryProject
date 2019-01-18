@@ -9,7 +9,7 @@ def main():
     session = requests.session()
     
     mainURL = 'http://data4library.kr/api/loanItemSrch?authKey='
-    API_KEY = "f2b79adb5d197d49b9d90cb2a7863b70cb6fac6299e8b94ec804b8749e6e6991"
+    API_KEY = "[API키를 입력하세요]"
     ageGroup = ['10', '20', '30', '40', '50', '60', '70']
     urls = scrape_list_page(mainURL, API_KEY, ageGroup)
 
