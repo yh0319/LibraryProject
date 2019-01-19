@@ -9,7 +9,7 @@ def main():
     session = requests.session()
     
     mainURL = 'http://data4library.kr/api/loanItemSrch?authKey='
-    API_KEY = "f2b79adb5d197d49b9d90cb2a7863b70cb6fac6299e8b94ec804b8749e6e6991"
+    API_KEY = "[APIKEY 입력하시오]"
     years = []
     for i in range(16):
         i = 2004 + i

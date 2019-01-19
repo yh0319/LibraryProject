@@ -15,7 +15,7 @@ def main():
             isbnList.append(i)
 
     mainURL = 'http://data4library.kr/api/recommandList?authKey='
-    API_KEY = "f2b79adb5d197d49b9d90cb2a7863b70cb6fac6299e8b94ec804b8749e6e6991"
+    API_KEY = "[APIKEY를 입력하시오]"
 
     urls = scrape_list_page(mainURL, API_KEY, isbnList)
 
