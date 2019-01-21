@@ -15,7 +15,8 @@ def main():
             isbnList.append(i)
 
     mainURL = 'http://data4library.kr/api/recommandList?authKey='
-    API_KEY = "[APIKEY를 입력하시오]"
+
+    API_KEY = "[APIKEY를 입력하세요]"
 
     urls = scrape_list_page(mainURL, API_KEY, isbnList)
 
@@ -26,9 +27,11 @@ def main():
         response = session.get(url)
         bookInfo = scrape_detail_page(response)
         recommandList.append(bookInfo)
+
     
     print(recommandList)
 
+    # 크롤링 할 때마다 명칭 변경 필수
     with open("recommandList.json", "w", encoding="utf-8-sig") as f:
         json.dump(recommandList, fp=f, ensure_ascii=False, indent=3)
 
@@ -43,8 +46,8 @@ def scrape_detail_page(response):
     try:
         soup = BeautifulSoup(response.text, 'html.parser')
         bookInfo = []
-        for i in range(5):
-            keyword = soup.select("isbn13")[0].string
+        for i in range(len(soup.select("bookname"))):
+            query = soup.select("isbn13")[0].string
             bookname = soup.select("bookname")[i].string
             author =soup.select("authors")[i].string
             publisher = soup.select("publisher")[i].string
@@ -52,7 +55,7 @@ def scrape_detail_page(response):
             isbn = soup.select("isbn13")[i+1].string
 
             dict = {
-                'keyword' : keyword,
+                'query' : query,
                 'isbn' : isbn,
                 'bookname' : bookname,
                 'author': author,
