@@ -5,6 +5,8 @@ import json
 import pymongo
 import re
 import pandas as pd
+import bson
+from bson.raw_bson import RawBSONDocument
 def main():
     session = requests.session()
 
@@ -38,46 +40,45 @@ def main():
 
     
     #list 형식으로 카테고리 가져오기
-    category = pd.read_csv('category.csv', header=None)
+    category = pd.read_csv('interpark.csv', header=None)
     category = category[0].tolist()
+    print(category)
 
-    urls = scrape_list_page(lists, category, mainurl, API_KEY) #123574개
-
-    library_book_list = []
+    urls = scrape_list_page(lists, category, mainurl, API_KEY)
+    interpark_book_list = []
     for url in urls:
         time.sleep(1)
         response = session.get(url)
         bookInfo = scrape_detail_page(response)
         #print(bookInfo)
-        library_book_list.append(bookInfo)
-        break
+        interpark_book_list.append(bookInfo)
+        #break
 
-    library_book_list_new = list_clear(library_book_list)
+    interpark_book_list_new = list_clear(interpark_book_list)
 
-    categorized_book_list = categorization(library_book_list_new)
+    categorized_book_list = categorization(interpark_book_list_new)
     #print(categorized_book_list[1])
    
-    with open("publicLibrary.json", "w", encoding="utf-8-sig") as f:
+    with open("interpark.json", "w", encoding="utf-8-sig") as f:
         json.dump(categorized_book_list, fp=f, ensure_ascii=False, indent=3)
 
-    insertMongDB(categorized_book_list)
+    insertmongoDB(categorized_book_list)
 
     
 
 def scrape_list_page(lists, category, mainurl, API_KEY):
-    for x in lists:
+    for x in lists[:]:
         for y in category:
-            url = "{}{}&query={}&categoryId={}&maxResults=100&soldOut=n".format(mainurl, API_KEY, x, y)
-            
-            print(url)
+            url = "{}{}&query={}&categoryId={}&maxResults=100&start={}&searchTarget=book&soldOut=n&queryType=title".format(mainurl, API_KEY, x, y)
+            #print(url)
             yield url
 
 def scrape_detail_page(response):
     try:
         soup = BeautifulSoup(response.text,'html.parser') 
         bookInfo = []
-        count = 1
-        for i in range(len(soup.select("item"))):
+        count = 0
+        for i in range(len(soup.select("item title"))):
             title = soup.select("item title")[i].string
             desc = soup.select("item description")[i].string
             date = soup.select("item pubdate")[i].string
@@ -87,6 +88,7 @@ def scrape_detail_page(response):
             isbn = soup.select("item isbn")[i].string
             translator = soup.select("item translator")[i].string
             id = soup.select("item itemid")[i].string
+            image = soup.select("item coverlargeurl")[i].string
             count+=1
         
             dict = {
@@ -99,7 +101,8 @@ def scrape_detail_page(response):
                 'isbn' : isbn,
                 'translator' : translator,
                 'id' : id,
-                'count' : count
+                'image' : image,
+                #'count' : count
              }
             bookInfo.append(dict)
         return bookInfo
@@ -140,7 +143,6 @@ def categorization(list):
     major = []#전공도서/대학교재
     health = []#건강/뷰티
     travel = [] #여행
-    tresh = []
 
     for n in list:
     #print(n)
@@ -154,7 +156,7 @@ def categorization(list):
             social.append(n)
         elif n['categoryname'] =='국내도서>역사와 문화':
             culture.append(n)
-        elif n['categoryname'] =='국내도서>만화':
+        elif n['categoryname'] =='국내도서>만화/라이트노벨':
             comic.append(n)
         elif n['categoryname'] =='국내도서>유아':
             baby.append(n)
@@ -196,24 +198,22 @@ def categorization(list):
 
         elif n['categoryname'] =='국내도서>여행':
             travel.append(n)
-        else:
-            tresh.append(n)
 
 
-    totlal_list =  [novel,poem,art,social,culture,comic,baby,life,language,science,economy,improve,human,region,computer,license,hobby,major,health,travel,tresh]    
+    totlal_list =  [novel,poem,art,social,culture,comic,baby,life,language,science,economy,improve,human,region,computer,license,hobby,major,health,travel]    
     return totlal_list
 
-def insertMongDB(list):
+def insertmongoDB(list):
     myclient = pymongo.MongoClient('mongodb://localhost:27017/')
     #database 생성
-    mydb = myclient['libraryBooks']  #libraryBooks
+    mydb = myclient['interparkBooks']  #interparkBooks
     #print(myclient.list_database_names())
 
     '''
     #데이터베이스 존재 여부 확인
     dblist = myclient.list_database_names()
     
-    if 'libraryBooks' in dblist:
+    if 'interparkBooks' in dblist:
         print("The database exists.")
     else:
         print("The database does not exist")
@@ -238,8 +238,7 @@ def insertMongDB(list):
                 'hobby',
                 'major',
                 'health',
-                'travel',
-                'tresh']
+                'travel']
 
     i = 0
     for a in kdc_list:
@@ -249,6 +248,6 @@ def insertMongDB(list):
         #print("********************************", a ,"************************************")
         for b in a.find():
             print(b)
-        
+
 if __name__ == "__main__":
     main()
