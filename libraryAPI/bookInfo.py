@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
+import timefrom bs4 import BeautifulSoup
+import requests
 import time
 import json
 import pymongo
@@ -7,7 +9,7 @@ import re
 
 def main():
     session = requests.session()
-    with open('isbn1.txt', "r", encoding="utf-8") as f:
+    with open('isbn\isbn5.txt', "r", encoding="utf-8") as f:
         isbnList = []
         for i in f.readlines():
             i = i.replace('\n', '')
@@ -18,7 +20,7 @@ def main():
 
 
     API_KEY = "[APIKEY]"
-
+    
     urls = scrape_list_page(mainURL, API_KEY, isbnList)
 
     # headers = {'User-Agent':'' }
@@ -28,13 +30,14 @@ def main():
         response = session.get(url)
         bookInfo = scrape_detail_page(response)
         newBookInfo.append(bookInfo)
-        break
+
+    
 
     
     print(newBookInfo)
 
     # 크롤링 할 때마다 명칭 변경 필수
-    with open("bookInfo.json", "w", encoding="utf-8-sig") as f:
+    with open("bookInfo4.json", "w", encoding="utf-8-sig") as f:
         json.dump(newBookInfo, fp=f, ensure_ascii=False, indent=3)
 
 
@@ -46,19 +49,24 @@ def scrape_list_page(mainURL, API_KEY, isbnList):
 
 def scrape_detail_page(response):
     try:
-        soup = BeautifulSoup(response.text, 'html.parser')
+        soup = BeautifulSoup(response.content, features='xml')
         bookInfo = []
 
-        isbn = soup.select("isbn13").string
-        bookname = soup.select("bookname").string
-        classno = soup.select("class_no").string
-        author =soup.select("authors").string
-        publisher = soup.select("publisher").string
-        publication_year = soup.select("publication_year").string
-        bookImage = soup.select("bookImageURL").string
-        description = soup.select("description").string
-        totalLoanCnt = soup.select("loanCnt")[0].string
-
+        # for 0 in range(len(soup.select("bookname"))):
+        isbn = soup.find("isbn13").text
+        bookname = soup.find("bookname").text
+        classno = soup.find("class_no").text
+        author = soup.find("authors").text
+        publisher = soup.find("publisher").text
+        publication_year = soup.find("publication_year").text
+        bookImage = (soup.find("bookImageURL")).text
+        description = soup.find("description").text
+        if soup.find("loanCnt") is None:
+            LoanCnt = '' 
+        else: 
+            LoanCnt = soup.find("loanCnt").text
+       
+       
         dict = {
             'isbn' : isbn,
             'classno' : classno,
@@ -68,7 +76,7 @@ def scrape_detail_page(response):
             'publication_year' : publication_year,
             'bookImage': bookImage,
             'description' : description,
-            'loanCnt' : totalLoanCnt
+            'loanCnt' : LoanCnt
         }
         bookInfo.append(dict)
         return bookInfo
@@ -78,5 +86,3 @@ def scrape_detail_page(response):
 
 if __name__ == "__main__":
     main()
-
-
