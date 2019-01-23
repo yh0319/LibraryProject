@@ -5,6 +5,8 @@ import json
 import pymongo
 import re
 import pandas as pd
+import bson
+from bson.raw_bson import RawBSONDocument
 def main():
     session = requests.session()
 
@@ -42,9 +44,10 @@ def main():
     category = category[0].tolist()
     print(category)
 
-    urls = scrape_list_page(lists, category, mainurl, API_KEY) #123574개
-
+    #urls에 다음 내용 저장
+    urls = scrape_list_page(lists, category, mainurl, API_KEY)
     interpark_book_list = []
+    
     for url in urls:
         time.sleep(1)
         response = session.get(url)
@@ -63,45 +66,52 @@ def main():
 
     insertmongoDB(categorized_book_list)
 
+
     
 
+
 def scrape_list_page(lists, category, mainurl, API_KEY):
-    for x in lists[0]:
+    for x in lists[:]:
         for y in category:
-            url = "{}{}&query={}&categoryId={}&maxResults=100&searchTarget=book&soldOut=n".format(mainurl, API_KEY, x, y)
-            print(url)
-            yield url
+            z=0
+            for z in range(i):
+                z+=1
+                url = "{}{}&query={}&categoryId={}&maxResults=100&start={}&searchTarget=book&soldOut=n&queryType=title".format(mainurl, API_KEY, x, y, z)
+                #print(url)
+                yield url
 
 def scrape_detail_page(response):
     try:
         soup = BeautifulSoup(response.text,'html.parser') 
         bookInfo = []
-        #count = 0
-        for i in range(len(soup.select("item title"))):
-            title = soup.select("item title")[i].string
-            desc = soup.select("item description")[i].string
-            date = soup.select("item pubdate")[i].string
-            categoryname = soup.select("item categoryname")[i].string
-            author =soup.select("item author")[i].string
-            publisher = soup.select("item publisher")[i].string
-            isbn = soup.select("item isbn")[i].string
-            translator = soup.select("item translator")[i].string
-            id = soup.select("item itemid")[i].string
-            #count+=1
-        
-            dict = {
-                'title' : title,
-                'desc' : desc,
-                'date' : date,
-                'categoryname' : categoryname,
-                'author' : author,
-                'publisher' : publisher,
-                'isbn' : isbn,
-                'translator' : translator,
-                'id' : id,
-                #'count' : count
-             }
-            bookInfo.append(dict)
+        for i in soup.select('itemsperpage')[0].string:
+            if i==0:
+                break
+            else:
+                for j in range(len(soup.select("item"))):
+                    title = soup.select("item title")[j].string
+                    desc = soup.select("item description")[j].string
+                    date = soup.select("item pubdate")[j].string
+                    categoryname = soup.select("item categoryname")[j].string
+                    author = soup.select("item author")[j].string
+                    publisher = soup.select("item publisher")[j].string
+                    isbn = soup.select("item isbn")[j].string
+                    translator = soup.select("item translator")[j].string
+                    id = soup.select("item itemid")[j].string
+                    image = soup.select("item coverlargeurl")[j].string
+                    dict = {
+                        'title' : title,
+                        'desc' : desc,
+                        'date' : date,
+                        'categoryname' : categoryname,
+                        'author' : author,
+                        'publisher' : publisher,
+                        'isbn' : isbn,
+                        'translator' : translator,
+                        'id' : id,
+                        'image' : image,
+                    }
+                    bookInfo.append(dict)
         return bookInfo
     except Exception as e:
         print("페이지 파싱 에러", e)
