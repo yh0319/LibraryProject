@@ -10,29 +10,9 @@ from bson.raw_bson import RawBSONDocument
 def main():
     session = requests.session()
 
-# 한글 철자 모음 리스트
-    with open("korean.txt","r",encoding="utf-8") as f:
-        char = f.read()
-        list_kor = []
-        for i in char:
-            list_kor.append(i)
-
-    list_kor = list_kor[1:len(list_kor)]
-
-    #영어 철자 모음 리스트
-    list_eng_s = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-
-    list_eng_l = []
-    for c in list_eng_s:
-        list_eng_l.append(c.upper())
-
-    #숫자 모음 리스트
-    list_dig = ["0","1","2","3","4","5","6","7","8","9"]
-    #--------------------------------------------------------------------------------------------------------------------
-    lists = list_kor + list_eng_s + list_eng_l + list_dig
 
     API_KEY = 'CA4B20C10CE7B07B8A0376F898EA32F24C0B956EFB0E5E7422A6886902CD8A21'
-    mainurl = 'http://book.interpark.com/api/search.api?key='
+    mainurl = 'http://book.interpark.com/api/recommend.api?key='
 
 
     
@@ -42,7 +22,7 @@ def main():
     print(category)
 
     #urls에 다음 내용 저장
-    urls = scrape_list_page(lists, category, mainurl, API_KEY)
+    urls = scrape_list_page(category, mainurl, API_KEY)
     interpark_book_list = []
     
     for url in urls:
@@ -58,21 +38,20 @@ def main():
     categorized_book_list = categorization(interpark_book_list_new)
     #print(categorized_book_list[1])
    
-    with open("interpark.json", "w", encoding="utf-8-sig") as f:
+    with open("interpark_rec.json", "w", encoding="utf-8-sig") as f:
         json.dump(categorized_book_list, fp=f, ensure_ascii=False, indent=3)
 
     insertmongoDB(categorized_book_list)
 
 
-    #http://book.interpark.com/api/search.api?key=CA4B20C10CE7B07B8A0376F898EA32F24C0B956EFB0E5E7422A6886902CD8A21&query=가&categoryId=101&maxResults=100&searchTarget=book&soldOut=n&queryType=title
+    
 
 
-def scrape_list_page(lists, category, mainurl, API_KEY):
-    for x in lists[:]:
-        for y in category:
-            url = "{}{}&query={}&categoryId={}&maxResults=100&searchTarget=book&soldOut=n&queryType=title".format(mainurl, API_KEY, x, y)
-            print(url)
-            yield url
+def scrape_list_page(category, mainurl, API_KEY):
+    for x in category:
+        url = "{}{}&categoryId={}".format(mainurl, API_KEY, x)
+        print(url)
+        yield url
 
 def scrape_detail_page(response):
     try:
@@ -209,7 +188,7 @@ def categorization(list):
 def insertmongoDB(list):
     myclient = pymongo.MongoClient('mongodb://localhost:27017/')
     #database 생성
-    mydb = myclient['interparkBooks_best']  #interparkBooks
+    mydb = myclient['interparkBooks_rec']  #interparkBooks
     #print(myclient.list_database_names())
 
     '''
