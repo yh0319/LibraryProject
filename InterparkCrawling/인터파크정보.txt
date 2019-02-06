@@ -1,0 +1,18 @@
+﻿인터파크API 지원종류
+CA4B20C10CE7B07B8A0376F898EA32F24C0B956EFB0E5E7422A6886902CD8A21
+http://book.interpark.com/api/xmlrpc?query=음악
+책검색
+인터파크도서에 제공하는 책 검색 Open API 입니다. 다양한 방식의 검색을 통해 책에 대한 다양한 정보를 제공하고 있습니다. 이 API를 통해 나만의 서재, 많은 사람들과 함께 책 이야기를 만들어 보세요.
+http://book.interpark.com/api/search.api?key=interpark
+
+베스트셀러
+인터파크도서에 제공하는 베스트 셀러 Open API 입니다. 인터파크 도서에서 각 분야별 판매량을 기준으로 집계하여 제공됩니다.
+http://book.interpark.com/api/bestSeller.api?key=interpark
+
+추천도서
+인터파크도서에 제공하는 추천도서 Open API 입니다. 인터파크 도서에 등록되는 상품을 각 분야로 집계하여 제공됩니다.
+http://book.interpark.com/api/recommend.api?key=interpark
+
+신간도서
+인터파크도서에 제공하는 신간도서 Open API 입니다. 인터파크 도서에 등록되는 상품을 각 분야로 집계하여 제공됩니다.
+http://book.interpark.com/api/newBook.api?key=interpark

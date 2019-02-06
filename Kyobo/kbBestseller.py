@@ -23,19 +23,8 @@ try:
         
         bestseller = []
         for i in range(0,19):
-                # #main_contents > ul > li:nth-child(21) > div.detail > div.title > a > strong
-                #findurl=(driver.find_elements_by_css_selector('#main_contents > ul > li:nth-child(*) > div.detail > div.title > a > strong'))(i).get_attribute('href')
                 findurl = (driver.find_elements_by_xpath('//*[@id="main_contents"]/ul/li[*]/div[2]/div[2]/a'))[i].get_attribute('href')
                 driver.get(findurl)
-                #sleep(3)
-                # #main_contents > ul > li:nth-child(14) > div.detail > div.title > a > strong
-                #driver.find_element_by_css_selector("div > ul.sign_lst > li:nth-child({}) > div > a".format(i)).click()
-                #driver.find_element_by_xpath('//*[@id="main_contents"]/ul/li[{}]/div[2]/div[2]/a'.format(i).click()
-                #soup = BeautifulSoup(driver.page_source, "html.parser")
-                #driver.implicitly_wait(3)
-                # isbnInfo = (driver.find_element_by_css_selector('#container > div > div > div > table > tbody > tr > td > span'))
-                # isbn = soup.select('#container div div div table tbody tr td span')[0].string
-                # //*[@id="container"]/div[5]/div[1]/div[3]/table/tbody/tr[1]/td/span[1]
                 isbnInfo = (driver.find_element_by_xpath('//*[@id="container"]/div[5]/div[1]/div[3]/table/tbody/tr[1]/td/span[1]')).text
                 bookdic = {
                     'isbn': str(isbnInfo)
