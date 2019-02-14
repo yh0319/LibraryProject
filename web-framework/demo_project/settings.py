@@ -39,9 +39,22 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pages',
     'users',
+    'haystack',
 ]
 
 AUTH_USER_MODEL = 'users.Customuser'
+
+
+# Whoosh
+import os
+WHOOSH_INDEX=os.path.join(BASE_DIR, 'whoosh_index')
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': WHOOSH_INDEX,
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
