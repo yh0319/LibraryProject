@@ -66,8 +66,8 @@
                     <div class="col-12 col-sm-6 col-lg-5 col-xl-4">
                         <!-- Top Search Area -->
                         <div class="top-search-area">
-                            <form action="#" method="post">
-                                <input type="search" name="top-search" id="topSearch" placeholder="Search">
+                            <form action="search" method="get">
+                                <input type="search" name="q" id="topSearch" placeholder="Search">
                                 <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
@@ -78,7 +78,8 @@
 
         <!-- Logo Area -->
         <div class="logo-area">
-            <a href="index.html"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+            <a href="/"><h1>Culture Clinic</h1></a>
+            <!--<img src="{% static 'img/core-img/logo.png' %}" alt="">-->
         </div>
 
         <!-- Navbar Area -->
@@ -107,11 +108,11 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="#">About Us</a></li>
+                                    <li><a href="/">Home</a></li>
+                                    <li><a href="search">Search</a></li>
                                     <li><a href="#">Pages</a>
                                         <ul class="dropdown">
-                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="/">Home</a></li>
                                             <li><a href="catagory.html">Catagory</a></li>
                                             <li><a href="catagory-post.html">Catagory Post</a></li>
                                             <li><a href="single-post.html">Single Post</a></li>

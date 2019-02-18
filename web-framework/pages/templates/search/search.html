@@ -1,38 +1,397 @@
-<h2>Search</h2>
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
 
-    <form method="get" action=".">
-        <table>
-            {{ form.as_table }}
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input type="submit" value="Search">
-                </td>
-            </tr>
-        </table>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-        {% if query %}
-            <h3>Results</h3>
+    <!-- Title -->
+    <title>Search - book </title>
 
-            {% for result in page.object_list %}
-                {{ result.object.bName }}
-                {{ result.object.author }}
-                {{ result.object.publisher }}
-                {{ result.object.publication_year }}
-                {{ result.object.bImage }}
-                <br>
-            {% empty %}
-                <p>No results found.</p>
-            {% endfor %}
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
 
-            {% if page.has_previous or page.has_next %}
-                <div>
-                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                    |
-                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-content">
+            <h3>Cooking in progress..</h3>
+            <div id="cooking">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div id="area">
+                    <div id="sides">
+                        <div id="pan"></div>
+                        <div id="handle"></div>
+                    </div>
+                    <div id="pancake">
+                        <div id="pastry"></div>
+                    </div>
                 </div>
-            {% endif %}
-        {% else %}
-            {# Show some example queries to run, maybe query syntax, something else? #}
-        {% endif %}
-    </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header-area bg-img bg-overlay" style="background-image: url(img/bg-img/header.jpg);">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center justify-content-between">
+                    <div class="col-12 col-sm-6">
+                        <!-- Top Social Info -->
+                        <div class="top-social-info">
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Behance"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-5 col-xl-4">
+                        <!-- Top Search Area -->
+                        <div class="top-search-area">
+                                <form action="" method="get">
+                                    <input type="search" name="q" id="topSearch" placeholder="Search">
+                                    <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logo Area -->
+        <div class="logo-area">
+            <a href="/"><h1>Culture Clinic</h1></a>
+            <!--<img src="{% static 'img/core-img/logo.png' %}" alt="">-->
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="bueno-main-menu" id="sticker">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="buenoNav">
+
+                        <!-- Toggler -->
+                        <div id="toggler"><img src="{% static 'img/core-img/toggler.png' %}" alt=""></div>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href='{% url "home" %}'>Home</a></li>
+                                    <li><a href="javascript:window.location.href=window.location.href">Search</a></li>
+                                    <li><a href="#">Pages</a>
+                                        <ul class="dropdown">
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a href="catagory.html">Catagory</a></li>
+                                            <li><a href="catagory-post.html">Catagory Post</a></li>
+                                            <li><a href="single-post.html">Single Post</a></li>
+                                            <li><a href="receipe.html">Recipe</a></li>
+                                            <li><a href="contact.html">Contact</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Recipes</a>
+                                        <div class="megamenu">
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a href="#">- Recipe</a></li>
+                                                <li><a href="#">- Bread</a></li>
+                                                <li><a href="#">- Breakfast</a></li>
+                                                <li><a href="#">- Meat</a></li>
+                                                <li><a href="#">- Fastfood</a></li>
+                                                <li><a href="#">- Salad</a></li>
+                                                <li><a href="#">- Soup</a></li>
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a href="#">- Recipe</a></li>
+                                                <li><a href="#">- Bread</a></li>
+                                                <li><a href="#">- Breakfast</a></li>
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a href="#">- Recipe</a></li>
+                                                <li><a href="#">- Bread</a></li>
+                                                <li><a href="#">- Breakfast</a></li>
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a href="#">- Recipe</a></li>
+                                                <li><a href="#">- Bread</a></li>
+                                                <li><a href="#">- Breakfast</a></li>
+                                                <li><a href="#">- Meat</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li><a href="single-post.html">Blog</a></li>
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+
+                                <!-- Login/Register -->
+                                <div class="login-area">
+                                        {% if user.is_authenticated %}
+                                         Hi {{ user.username }} &nbsp;&nbsp;
+                                        <a href="{% url 'logout' %}">Log out</a>
+                                        {% else %}
+                                        <a href="{% url 'login' %}">Log In </a>&nbsp;&nbsp;
+                                        <a href="{% url 'signup' %}">Sign Up</a>
+
+                                        {% endif %}
+                                </div>
+                            </div>
+                            <!-- Nav End -->
+
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Treading Post Area Start ##### -->
+    <div class="treading-post-area" id="treadingPost">
+        <div class="close-icon">
+            <i class="fa fa-times"></i>
+        </div>
+
+        <h4>Treading Post</h4>
+
+        <!-- Single Blog Post -->
+        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img src="{% static 'img/bg-img/9.jpg' %}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="#" class="post-tag">The Best</a>
+                <a href="#" class="post-title">Friend eggs with ham</a>
+                <div class="post-meta">
+                    <a href="#" class="post-date">July 11, 2018</a>
+                    <a href="#" class="post-author">By Julia Stiles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Blog Post -->
+        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img src="{% static 'img/bg-img/10.jpg' %}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="#" class="post-tag">The Best</a>
+                <a href="#" class="post-title">Mushrooms with pork chop</a>
+                <div class="post-meta">
+                    <a href="#" class="post-date">July 11, 2018</a>
+                    <a href="#" class="post-author">By Julia Stiles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Blog Post -->
+        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img src="{% static 'img/bg-img/11.jpg' %}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="#" class="post-tag">The Best</a>
+                <a href="#" class="post-title">Birthday cake with chocolate</a>
+                <div class="post-meta">
+                    <a href="#" class="post-date">July 11, 2018</a>
+                    <a href="#" class="post-author">By Julia Stiles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Blog Post -->
+        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img src="{% static 'img/bg-img/9.jpg' %}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="#" class="post-tag">The Best</a>
+                <a href="#" class="post-title">Friend eggs with ham</a>
+                <div class="post-meta">
+                    <a href="#" class="post-date">July 11, 2018</a>
+                    <a href="#" class="post-author">By Julia Stiles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Blog Post -->
+        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img src="{% static 'img/bg-img/10.jpg' %}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="#" class="post-tag">The Best</a>
+                <a href="#" class="post-title">Mushrooms with pork chop</a>
+                <div class="post-meta">
+                    <a href="#" class="post-date">July 11, 2018</a>
+                    <a href="#" class="post-author">By Julia Stiles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Blog Post -->
+        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img src="{% static 'img/bg-img/11.jpg' %}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="#" class="post-tag">The Best</a>
+                <a href="#" class="post-title">Birthday cake with chocolate</a>
+                <div class="post-meta">
+                    <a href="#" class="post-date">July 11, 2018</a>
+                    <a href="#" class="post-author">By Julia Stiles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Treading Post Area End ##### -->
+
+
+    <div class="post-catagory section-padding-100">
+        <div class="container">
+            <div class="list_search_result">
+                    <form method="get" action="">
+                            
+                               
+                                    <input type="search" class="form-control" name="q">
+                                    <br>
+                                    <input type="submit" class="btn bueno-btn w-100" value="Search">
+                      
+                            
+
+ 
+
+                        {% if query %}
+                        <br><br><br>
+                            {% for result in page.object_list %}
+                            <table class="type_list"  width= 100%;>
+                                <colgroup>
+                                    <col width="150">
+                                    <col width="120">
+                                    <col width="150">
+                                </colgroup>
+                                <tbody>
+                                        <tr>
+                                            <td class="image">
+                                                <div class="cover">
+                                                    <img src="{{ result.object.bImage }}" width="180" height="269" />
+                                                </div>
+                                                    
+                                            </td>
+                                            <td class="detail">
+                                                <div class="title">{{ result.object.bName }}</div>
+                                                <div class="author">{{ result.object.author }}</div>
+                                                <div class="publisher">{{ result.object.publisher }}</div>
+                                                <div class="publication_year">{{ result.object.publication_year }}</div>         
+                                            </td>
+                                            <td class="info">
+                                                <div class="rating">별점을 매겨주세요</div>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>  
+                                <br>
+                            {% empty %}
+                                <p>No results found.</p>
+                            {% endfor %}
+                
+                            {% if page.has_previous or page.has_next %}
+                                <div>
+                                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+                                    |
+                                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            {# Show some example queries to run, maybe query syntax, something else? #}
+                        {% endif %}
+                    </form>
+  
+                </div>
+            </div>
+        </div>
+
+
+    
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-5">
+                    <!-- Copywrite Text -->
+                    <p class="copywrite-text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                </div>
+                <div class="col-12 col-sm-7">
+                    <!-- Footer Nav -->
+                    <div class="footer-nav">
+                        <ul>
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#">Recipes</a></li>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'js/active.js' %}"></script>
+</body>
+
+</html>
