@@ -40,21 +40,23 @@ INSTALLED_APPS = [
     'pages',
     'users',
     'haystack',
+    'elasticsearch',
 ]
 
 AUTH_USER_MODEL = 'users.Customuser'
 
 
-# Whoosh
-import os
-WHOOSH_INDEX=os.path.join(BASE_DIR, 'whoosh_index')
+# Elasticsearch 
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': WHOOSH_INDEX,
+        'ENGINE': 'haystack.backends.elasticsearch5_backend.Elasticsearch5SearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
     },
 }
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
