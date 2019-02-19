@@ -266,7 +266,7 @@
         <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
             <!-- Blog Thumbnail -->
             <div class="blog-thumbnail">
-                <img src="{% static 'img/bg-img/10.jpg'%}" alt="">
+                <img src="{% static 'img/bg-img/10.jpg' %}" alt="">
             </div>
             <!-- Blog Content -->
             <div class="blog-content">
@@ -302,85 +302,28 @@
     <div class="hero-area">
         <!-- Hero Post Slides -->
         <div class="hero-post-slides owl-carousel">
+
             <!-- Single Slide -->
+            {% for book in object_list %}
             <div class="single-slide">
                 <!-- Blog Thumbnail -->
                 <div class="blog-thumbnail">
-                    <a href="#"><img src="{% static 'img/bg-img/1.jpg' %}" alt=""></a>
+                    <a href="#"><img width="460" height="550" src="{{ book.bImage }}" alt=""></a>
                 </div>
 
                 <!-- Blog Content -->
                 <div class="blog-content-bg">
                     <div class="blog-content">
-                        <a href="#" class="post-tag">Healthy Food</a>
-                        <a href="#" class="post-title">Chicken Salad</a>
+                        <a href="#" class="post-tag">Today's book</a>
+                        <a href="#" class="post-title">{{ book.bName }}</a>
                         <div class="post-meta">
-                            <a href="#" class="post-date">July 11, 2018</a>
-                            <a href="#" class="post-author">By Julia Stiles</a>
+                            <a href="#" class="post-date">{{ book.publication_year }}</a>
+                            <a href="#" class="post-author">{{ book.author }}</a>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Single Slide -->
-            <div class="single-slide">
-                <!-- Blog Thumbnail -->
-                <div class="blog-thumbnail">
-                    <a href="#"><img src="{% static 'img/bg-img/2.jpg' %}" alt=""></a>
-                </div>
-
-                <!-- Blog Content -->
-                <div class="blog-content-bg">
-                    <div class="blog-content">
-                        <a href="#" class="post-tag">Healthy Food</a>
-                        <a href="#" class="post-title">Chicken Salad</a>
-                        <div class="post-meta">
-                            <a href="#" class="post-date">July 11, 2018</a>
-                            <a href="#" class="post-author">By Julia Stiles</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Slide -->
-            <div class="single-slide">
-                <!-- Blog Thumbnail -->
-                <div class="blog-thumbnail">
-                    <a href="#"><img src="{% static 'img/bg-img/3.jpg' %}" alt=""></a>
-                </div>
-
-                <!-- Blog Content -->
-                <div class="blog-content-bg">
-                    <div class="blog-content">
-                        <a href="#" class="post-tag">Healthy Food</a>
-                        <a href="#" class="post-title">Chicken Salad</a>
-                        <div class="post-meta">
-                            <a href="#" class="post-date">July 11, 2018</a>
-                            <a href="#" class="post-author">By Julia Stiles</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Slide -->
-            <div class="single-slide">
-                <!-- Blog Thumbnail -->
-                <div class="blog-thumbnail">
-                    <a href="#"><img src="{% static 'img/bg-img/3.jpg' %}" alt=""></a>
-                </div>
-
-                <!-- Blog Content -->
-                <div class="blog-content-bg">
-                    <div class="blog-content">
-                        <a href="#" class="post-tag">Healthy Food</a>
-                        <a href="#" class="post-title">Chicken Salad</a>
-                        <div class="post-meta">
-                            <a href="#" class="post-date">July 11, 2018</a>
-                            <a href="#" class="post-author">By Julia Stiles</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
     <!-- ##### Hero Area End ##### -->
@@ -717,7 +660,16 @@
         </div>
     </div>
     <!-- ##### Instagram Area End ##### -->
+    <div>
 
+        {% for book in object_list %}
+
+        <img src="{{ book.bImage }}}">
+
+        {% endfor %}
+
+
+    </div>
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
         <div class="container">
