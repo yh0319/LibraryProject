@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %}
+  {{ board.name }} - {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+  <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+  <li class="breadcrumb-item active">{{ board.name }}</li>
+{% endblock %}
+
+{% block content %}
+
+
+  <table class="table table-striped mb-4">
+    <thead class="thead-inverse">
+      <tr>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>조회수</th>
+        <th>작성일자</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for topic in topics %}
+        {% url 'topic_posts' board.pk topic.pk as topic_url %}
+        <tr>
+          <td>
+            <p class="mb-0">
+              <a href="{{ topic_url }}">{{ topic.subject }}</a>
+              [ {{ topic.replies }} ] 
+            </p>
+          </td>
+          <td class="align-middle">{{ topic.created_by.username }}</td>
+          <td class="align-middle">{{ topic.views }}</td>
+          <td class="align-middle">{{ topic.created_at }}</td>
+        </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>  
+
+  {% include 'includes/pagination.html' %}
+  <div class="mb-4">
+    <a href="{% url 'new_topic' board.pk %}" class="btn btn-primary">글쓰기</a>
+  </div>
+{% endblock %}
