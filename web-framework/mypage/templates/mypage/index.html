@@ -1,0 +1,422 @@
+{% load static %}
+<!DOCTYPE html> 
+<html lang="ko-KR">
+<head> 
+    <meta charset="utf-8"/>
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <title>My Page</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+    .checked {
+    color: orange;
+    }
+    table {
+        table-layout: fixed;
+    }
+    td {
+        width: 140px;
+        padding: 10px;
+        vertical-align: top;
+    }
+        
+    body {
+        font-size: 15px;
+    }
+    .vividworknav {
+      width: auto;
+      height: auto;
+      float: left;
+      padding: 0;
+      position: relative;
+      background-color:white;
+    }
+
+    .vividworknav:hover img {
+      opacity: 0.3;
+    }
+
+    .vividworknav:hover .work-text-content {
+      opacity: 1; 
+    }
+
+    .vividworknav img {
+      padding: 0;
+      width: 100%;
+      display: block;
+      opacity: 1;
+    }
+
+    .vividworknav img,
+    .work-text-content {
+      -webkit-transition: opacity 0.5s ease-out;
+      -moz-transition: opacity 0.5s ease-out;
+      -o-transition: opacity 0.5s ease-out;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .work-text-content {
+      position: absolute;
+      color: #FF4500;
+      left: 0;
+      top: 25%;
+      right: 0;
+      bottom: 0;
+      font-size: 24px;
+      text-align: center;
+      opacity: 0;
+    }
+    </style>
+    <script>
+        function openCity(evt, cityName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " w3-red";
+        }
+    </script>
+    <!-- google chart here -->         
+</head>
+
+<body>
+    {% block content %}        
+        <!-- ##### Header Area Start ##### -->
+        <header class="header-area">
+            <!-- Top Header Area -->
+            <div class="top-header-area bg-img bg-overlay" style="background-image: url('{% static 'img/bg-img/header.jpg' %}');">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center justify-content-between">
+                        <div class="col-12 col-sm-6">
+                            <!-- Top Social Info -->
+                            <div class="top-social-info">
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Behance"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-5 col-xl-4">
+                            <!-- Top Search Area -->
+                            <div class="top-search-area">
+                                <form action="#" method="post">
+                                    <input type="search" name="top-search" id="topSearch" placeholder="Search">
+                                    <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <div class="logo-area">
+                <a href="/"><h1>Culture Clinic</h1></a>
+            </div>
+        
+            <!-- Navbar Area -->
+            <div class="bueno-main-menu" id="sticker">
+                <div class="classy-nav-container breakpoint-off">
+                    <div class="container">
+                        <!-- Menu -->
+                        <nav class="classy-navbar justify-content-between" id="buenoNav">
+    
+                            <!-- Toggler -->
+                            <div id="toggler"><img src="{% static 'img/core-img/toggler.png' %}" alt=""></div>
+    
+                            <!-- Navbar Toggler -->
+                            <div class="classy-navbar-toggler">
+                                <span class="navbarToggler"><span></span><span></span><span></span></span>
+                            </div>
+    
+                            <!-- Menu -->
+                            <div class="classy-menu">
+    
+                                <!-- Close Button -->
+                                <div class="classycloseIcon">
+                                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                                </div>
+    
+                                <!-- Nav Start -->
+                                <div class="classynav">
+                                    <ul>
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="/search">Search</a></li>
+                                        <li><a href="#">Culture</a>
+                                            <ul class="dropdown">
+                                                <li><a href="/book">book</a></li>
+                                                <li><a href="/movie">movie</a></li>
+                                                <li><a href="single-post.html">travel</a></li>
+    
+                                            </ul>
+                                        </li>
+                                        <li><a href="/community">Community</a></li>
+                                        <li><a href="/aboutus">About Us</a></li>                       
+                                        {% if user.is_authenticated %}
+                                            <li><a href =  "{% url 'mypage:index' %}">My Library</a></li>
+                                        {% endif %}
+                                    </ul>
+                                <!-- Login/Register -->
+                                <div class="login-area">
+                                        {% if user.is_authenticated %}
+                                            Hi {{ user.username }} &nbsp;&nbsp;
+                                            <a href="{% url 'logout' %}">Log out</a>
+                                            {% else %}
+                                            <a href="{% url 'login' %}">Log In </a>&nbsp;&nbsp;
+                                            <a href="{% url 'signup' %}">Sign Up</a>
+                                        {% endif %}
+                                </div>
+                            </div>
+                                <!-- Nav End -->
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- ##### Header Area End ##### -->
+        <h1 align = "center">{{ user.mName }} 님의 프로필</h1>
+        <div class="single-widget-area author-widget mb-30">
+            <div class="background-pattern bg-img" style="margin:auto;width:375px;height:341px;background-image: url('{% static 'img/core-img/pattern2.png' %}');">
+                <div class="author-thumbnail">
+                    <img src="{% static 'img/bg-img/231.jpg' %}" alt="">
+                </div>
+                <p><span>{{ user.mName }}</span>님의 자기소개</p>
+                <p>반갑습니다!</p>
+            </div>
+            <div class="social-info" style="margin:auto;width:375px;height:50px;background-color:#b5e7a0">
+                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+            </div>
+        </div>
+        <div class="w3-container">
+            <div class="w3-bar w3-#b0c364" style="margin:auto;width:960px;background-color:#b5e7a0">
+                <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'ratings')">나의평점</button>
+                <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'ratings_analysis')">평점분석</button>
+                <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'recommendations')">추천도서</button>
+                <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'genres')">취향분석</button>
+            </div>
+                
+            <div id="ratings" class="w3-container w3-border city" style="margin:auto;width:960px">
+                <h2>{{ user.mName }} 님의 평점 순위 Top 5</h2>
+                <br>
+                <table>
+                    <tr>
+                        {% for rate in top_rates %}
+                        <td>
+                            <img src = "{{ rate.bImage }}" style="width:119px;height:174px;display:block;margin-left:auto;margin-right:auto;">
+                        </td>
+                        {% endfor %}
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        {% for rate in top_rates %}
+                        <td>
+                            {{ rate.bName }}
+                            <br>
+                            <span class="fa fa-star checked"></span>{{ rate.rate }}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                </table>
+                <br>                
+            </div>
+            
+            <div id="ratings_analysis" class="w3-container w3-border city" style="display:none;margin:auto;width:960px">
+                    <h2>{{ user.mName }} 님의 평점 분석</h2>
+                    <br>
+                    <p style="font-size:20px;color:black">총 평점 수</p>
+                    <b style="font-size:17px;color:#FF4500">{{ num_of_read_books }}</b>
+                    <br><br>
+                    <p style="font-size:20px;color:black">평점 분포도</p>
+                    
+                    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                    <script type="text/javascript">
+                        google.charts.load("current", {packages:["corechart"]});
+                        google.charts.setOnLoadCallback(drawChart);
+                        var bNames = '{{ bName_list|escapejs }}';
+
+                        // console.log(bNames);
+                        // console.log(typeof(bNames));    //string
+                        bNames = bNames.replace(/'/gi, '"');
+                        bNames = bNames.replace('[','');
+                        bNames = bNames.replace(']','');
+                        bNames = bNames.replace('"','');
+                        // console.log('------');
+                        bNames = eval(bNames.split(','));
+                        b = []
+                        // bNames = bNames.replace('"','');
+                        for(var i = 0; i < bNames.length; i++){
+                            b.push(bNames[i].replace('"',''));
+                        }
+                        // console.log('==========');
+                        // console.log(bNames);
+                        var rates = '{{ rate_list|escapejs }}';
+                        rates = rates.replace(/'/gi, '"');
+                        rates = rates.replace('[','');
+                        rates = rates.replace(']','');
+                        rates = rates.replace('"','');
+                        rates = eval(rates.split(','));
+
+                        r = []
+
+                        for(var i = 0; i < rates.length; i++){
+                            r.push(rates[i].replace('"',''));
+                        }
+
+                        var result = [];
+                        // result[0] = [['도서 명', '평점']];
+                        b.forEach(function(v, i){
+                            var obj = [];
+                            obj[0] = v;
+                            obj[1] = r[i];
+                            result.push(obj);});
+                        console.log(result);
+                        console.log(typeof(result));
+                        // var djangoData = json.parse(rates)
+                        // var djangoData = JSON.parse('{{ rates }}');
+                        // var data = google.visualization.arrayToDataTable(djangoData);
+                        function drawChart() {
+                            // var data = google.visualization.arrayToDataTable(data);
+                        var data = google.visualization.arrayToDataTable(result);
+                            // ['도서명', '나의 평점'],
+                            // [' 엘론 머스크, 대담한 도전', 5.0],
+                            // [' 인간실격', 5.0],
+                            // [' 몰입', 3.0],
+                            // [' 나는 왜 이 일을 하는가?', 3.0],
+                            // [' 내가 알고 있는 걸 당신도 알게 된다면', 5.0],
+                            // [' 4차 산업혁성 시대 전문직의 미래', 4.0],
+                            // [' 신경 끄기의 기술', 5.0],
+                            // [' 스물아홉 생일, 1년 후 죽기로 결심했다', 5.0],
+                            // [' 회계 천재가 된 홍대리2', 4.0],
+                            // [' 심플하게 산다', 5.0],
+                            // [' 우리는 마약을 모른다', 3.0],
+                            // [' 힐빌리의 노래', 3.5],
+                            // [' 2017 대한민국 트렌드', 3.0],
+                            // [' 하버드의 생각수업', 4.0],
+                            // [' 어떻게 원하는 것을 얻는가', 5.0],
+                            // [' The Hunger Games', 4.0],
+                            // [' 꿈의 해석', 5.0],
+                            // [' 곰돌이 푸, 행복한 일은 매일 있어', 3.0],
+                            // [' 너의 췌장을 먹고 싶어', 1.0],
+                            // [' 넛지', 1.5],
+                            // [' 미생', 4.5],
+                            // [' 천 번을 흔들려야 어른이 된다', 1.0]]);
+                            
+                        var options = {
+                        title: '나의 평점 분포도',
+                        legend: { position: 'none' },
+                        };
+
+                        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+                        chart.draw(data, options);
+                        }
+                        </script>
+                    <div id="chart_div" style="width: 900px; height: 200px;"></div>
+                        
+                    <br>
+                    <p style="font-size:20px;color:black">나의 평균 평점<p>
+                    {% for key, value in avg_rate.items %}
+                        <b style="font-size:17px;color:#FF4500">{{ value|floatformat:1 }}</b>
+                    {% endfor %}
+                    
+                    <p style="font-size:20px;color:black">나의 도서 이력</p>
+                        {% for book in read_books %}
+                            {% if forloop.first %}
+                                <tr>
+                            {% endif %}
+                            <td><img src = "{{ book.bImage }}" style="width:119px;height:174px;margin-left:10px;margin-right:10px;margin-bottom:8px"></td>
+                            {% if forloop.last %}
+                                </tr>
+                            {% else %}
+                                {% if forloop.counter|divisibleby:"4" %}
+                                    </tr><tr>
+                                {% endif %}
+                            {% endif %} 
+                        {% endfor %}
+            </div>
+            
+            <div id="recommendations" class="w3-container w3-border city" style="display:none;margin:auto;width:960px">
+                <h2>{{ user.mName }} 님, 이런 책은 어떠세요?</h2><br>
+                {% for rec in rec_list %}
+                    {% if forloop.first %}
+                        <tr>
+                    {% endif %}
+                    <div class = 'vividworknav'>
+                    <td>
+                        <img src = "{{ rec.bImage }}" style="width:119px;height:174px;margin-left:10px;margin-right:10px;margin-bottom:8px">
+                        <div class="work-text-content"><b>{{ rec.bName }}</b></div>
+                    </td>
+                    </div>
+                    {% if forloop.last %}
+                        </tr>
+                    {% else %}
+                        {% if forloop.counter|divisibleby:"4" %}
+                            </tr><tr>
+                        {% endif %}
+                    {% endif %} 
+                {% endfor %}
+                <br>
+                <br>
+                <br>
+            </div>
+            
+            <div id="genres" class="w3-container w3-border city" style="display:none;margin:auto;width:960px">
+                <h2>{{ user.mName }} 님의 도서 취향 분석!</h2>
+                <img src = "{{ user.wImage.url }}">
+                <div id="piechart" style="width: 900px; height: 500px;"></div>
+                <h4>{{ user.mName }} 님은 ☆☆ 장르를 많이 읽으시는군요! </h4>
+                <h4>★★ 장르의 책은 어떠신가요 ? </h4>
+            </div>    
+        </div>
+    {% endblock content %}
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-5">
+                        <!-- Copywrite Text -->
+                        <p class="copywrite-text"><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                    <div class="col-12 col-sm-7">
+                        <!-- Footer Nav -->
+                        <div class="footer-nav">
+                            <ul>
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#">Recipes</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'js/active.js' %}"></script>

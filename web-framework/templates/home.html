@@ -90,7 +90,7 @@
                     <nav class="classy-navbar justify-content-between" id="buenoNav">
 
                         <!-- Toggler -->
-                        <div id="toggler"><img src="{% static 'img/core-img/toggler.png' %}" alt=""></div>
+                        <div id="toggler"></div>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -110,58 +110,19 @@
                                 <ul>
                                     <li><a href="/">Home</a></li>
                                     <li><a href="search">Search</a></li>
-                                    <li><a href="#">Pages</a>
+                                    <li><a href="#">Culture</a>
                                         <ul class="dropdown">
-                                            <li><a href="/">Home</a></li>
-                                            <li><a href="catagory.html">Catagory</a></li>
-                                            <li><a href="catagory-post.html">Catagory Post</a></li>
-                                            <li><a href="single-post.html">Single Post</a></li>
-                                            <li><a href="receipe.html">Recipe</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="book">book</a></li>
+                                            <li><a href="movie">movie</a></li>
+                                            <li><a href="single-post.html">travel</a></li>
+
                                         </ul>
                                     </li>
-                                    <li><a href="#">Recipes</a>
-                                        <div class="megamenu">
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="#">- Recipe</a></li>
-                                                <li><a href="#">- Bread</a></li>
-                                                <li><a href="#">- Breakfast</a></li>
-                                                <li><a href="#">- Meat</a></li>
-                                                <li><a href="#">- Fastfood</a></li>
-                                                <li><a href="#">- Salad</a></li>
-                                                <li><a href="#">- Soup</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="#">- Recipe</a></li>
-                                                <li><a href="#">- Bread</a></li>
-                                                <li><a href="#">- Breakfast</a></li>
-                                                <li><a href="#">- Meat</a></li>
-                                                <li><a href="#">- Fastfood</a></li>
-                                                <li><a href="#">- Salad</a></li>
-                                                <li><a href="#">- Soup</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="#">- Recipe</a></li>
-                                                <li><a href="#">- Bread</a></li>
-                                                <li><a href="#">- Breakfast</a></li>
-                                                <li><a href="#">- Meat</a></li>
-                                                <li><a href="#">- Fastfood</a></li>
-                                                <li><a href="#">- Salad</a></li>
-                                                <li><a href="#">- Soup</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li><a href="#">- Recipe</a></li>
-                                                <li><a href="#">- Bread</a></li>
-                                                <li><a href="#">- Breakfast</a></li>
-                                                <li><a href="#">- Meat</a></li>
-                                                <li><a href="#">- Fastfood</a></li>
-                                                <li><a href="#">- Salad</a></li>
-                                                <li><a href="#">- Soup</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="single-post.html">Blog</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="/community">Community</a></li>
+                                    <li><a href="contact.html">About Us</a></li>                       
+                                    {% if user.is_authenticated %}
+                                        <li><a href = "{% url 'mypage:index' %}">My Library</a></li>
+                                    {% endif %}
                                 </ul>
 
                                 <!-- Login/Register -->
@@ -177,7 +138,6 @@
                                 </div>
                             </div>
                             <!-- Nav End -->
-
                         </div>
                     </nav>
                 </div>
@@ -298,386 +258,207 @@
     </div>
     <!-- ##### Treading Post Area End ##### -->
 
-    <!-- ##### Hero Area Start ##### -->
-    <div class="hero-area">
-        <!-- Hero Post Slides -->
-        <div class="hero-post-slides owl-carousel">
 
-            <!-- Single Slide -->
-            {% for book in object_list %}
-            <div class="single-slide">
-                <!-- Blog Thumbnail -->
-                <div class="blog-thumbnail">
-                    <a href="#"><img width="460" height="550" src="{{ book.bImage }}" alt=""></a>
-                </div>
-
-                <!-- Blog Content -->
-                <div class="blog-content-bg">
-                    <div class="blog-content">
-                        <a href="#" class="post-tag">Today's book</a>
-                        <a href="#" class="post-title">{{ book.bName }}</a>
-                        <div class="post-meta">
-                            <a href="#" class="post-date">{{ book.publication_year }}</a>
-                            <a href="#" class="post-author">{{ book.author }}</a>
+    <!-- ##### Book Area Start ##### -->
+    <div class="post-catagory section-padding-100-0 mb-70">
+            <div class="container">
+                <div class="hero-area">
+                    <div class="hero-post-slides owl-carousel">
+                        <!-- Single Slide -->
+                        {% for book in object_list %}
+                        <div class="single-slide">
+                            <!-- Blog Thumbnail -->
+                            <div class="blog-thumbnail">
+                                <a href="#"><img src="{{ book.bImage }}" alt="" style="
+                                    width: 466px;
+                                    height: 466px;"></a>
+                            </div>
+                            <!-- Blog Content -->
+                            <div class="blog-content-bg" style="width: 220px; height: 260px;">
+                                <div class="blog-content">
+                                    <a href="#" class="post-tag">Today's book</a>
+                                    <a href="#" class="post-title"><font size="3px">{{ book.bName }}</font></a>
+                                    <div class="post-meta">
+                                        <a href="#" class="post-date">{{ book.publication_year }}</a>
+                                        <a href="#" class="post-author">{{ book.author }}</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-            {% endfor %}
         </div>
-    </div>
-    <!-- ##### Hero Area End ##### -->
+    <!-- ##### Book Area End ##### -->
 
-    <!-- ##### Catagory Area Start ##### -->
+    <!-- ##### Movie Area Start ##### -->
+    <div class="post-catagory section-padding-100-0 mb-70">
+            <div class="container">
+                <div class="hero-area">
+                    <div class="hero-post-slides owl-carousel">
+                        <!-- Single Slide -->
+                        <div class="single-slide">
+                            <!-- Blog Thumbnail -->
+                            <div class="blog-thumbnail">
+                                <a href="#"><img src="https://movie-phinf.pstatic.net/20190128_284/1548637887932Dwfkj_JPEG/movie_image.jpg" alt="" style="
+                                    width: 466px;
+                                    height: 466px;"></a>
+                            </div>
+                            <!-- Blog Content -->
+                            <div class="blog-content-bg" style="width: 220px; height: 260px;">
+                                <div class="blog-content">
+                                    <a href="#" class="post-tag">Today's Movie</a>
+                                    <a href="#" class="post-title"><font size="3px">사바하</font></a>
+                                    <div class="post-meta">
+                                        <a href="#" class="post-date">미스터리, 스릴러</a>
+                                        <a href="#" class="post-author">이정재, 박정민, 이재인</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-slide">
+                            <!-- Blog Thumbnail -->
+                            <div class="blog-thumbnail">
+                                <a href="#"><img src="https://movie-phinf.pstatic.net/20190116_206/1547615429111dINWj_JPEG/movie_image.jpg" alt="" style="
+                                    width: 466px;
+                                    height: 466px;"></a>
+                            </div>
+                            <!-- Blog Content -->
+                            <div class="blog-content-bg" style="width: 220px; height: 260px;">
+                                <div class="blog-content">
+                                    <a href="#" class="post-tag">Today's Movie</a>
+                                    <a href="#" class="post-title"><font size="3px">극한직업</font></a>
+                                    <div class="post-meta">
+                                        <a href="#" class="post-date">코미디</a>
+                                        <a href="#" class="post-author">류승룡, 이하늬, 진선규</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="single-slide">
+                            <!-- Blog Thumbnail -->
+                            <div class="blog-thumbnail">
+                                <a href="#"><img src="https://movie-phinf.pstatic.net/20190128_22/1548638810964Go9Wy_JPEG/movie_image.jpg" alt="" style="
+                                    width: 466px;
+                                    height: 466px;"></a>
+                            </div>
+                            <!-- Blog Content -->
+                            <div class="blog-content-bg" style="width: 220px; height: 260px;">
+                                <div class="blog-content">
+                                    <a href="#" class="post-tag">Today's Movie</a>
+                                    <a href="#" class="post-title"><font size="3px">알리타: 배틀엔젤</font></a>
+                                    <div class="post-meta">
+                                        <a href="#" class="post-date">액션 모험 멜로</a>
+                                        <a href="#" class="post-author">로사 살라자르, 크리스토프 왈츠</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="single-slide">
+                            <!-- Blog Thumbnail -->
+                            <div class="blog-thumbnail">
+                                <a href="#"><img src="https://movie-phinf.pstatic.net/20190118_146/1547795422217PI0cJ_JPEG/movie_image.jpg" alt="" style="
+                                    width: 466px;
+                                    height: 466px;"></a>
+                            </div>
+                            <!-- Blog Content -->
+                            <div class="blog-content-bg" style="width: 220px; height: 260px;">
+                                <div class="blog-content">
+                                    <a href="#" class="post-tag">Today's Movie</a>
+                                    <a href="#" class="post-title"><font size="3px">증인</font></a>
+                                    <div class="post-meta">
+                                        <a href="#" class="post-date">드라마</a>
+                                        <a href="#" class="post-author">정우성, 김향기</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ##### Movie Area End ##### -->
+
+
+    <!-- ##### meetup Area Start ##### -->
     <div class="post-catagory section-padding-100-0 mb-70">
         <div class="container">
-            <div class="row justify-content-center">
-                <!-- Single Post Catagory -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-post-catagory mb-30">
-                        <img src="{% static 'img/bg-img/4.jpg' %}" alt="">
-                        <!-- Content -->
-                        <div class="catagory-content-bg">
-                            <div class="catagory-content">
-                                <a href="#" class="post-tag">The Best</a>
-                                <a href="#" class="post-title">Healthy Food</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Post Catagory -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-post-catagory mb-30">
-                        <img src="{% static 'img/bg-img/5.jpg' %}" alt="">
-                        <!-- Content -->
-                        <div class="catagory-content-bg">
-                            <div class="catagory-content">
-                                <a href="#" class="post-tag">The Best</a>
-                                <a href="#" class="post-title">Organic Cuisine</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Single Post Catagory -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-post-catagory mb-30">
-                        <img src="{% static 'img/bg-img/6.jpg' %}" alt="">
-                        <!-- Content -->
-                        <div class="catagory-content-bg">
-                            <div class="catagory-content">
-                                <a href="#" class="post-tag">The Best</a>
-                                <a href="#" class="post-title">Vegetarian Food</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ##### Catagory Area End ##### -->
-
-    <!-- ##### Big Posts Area Start ##### -->
-    <div class="big-posts-area mb-50">
-        <div class="container">
-            <!-- Single Big Post Area -->
-            <div class="row align-items-center">
-                <div class="col-12 col-md-6">
-                    <div class="big-post-thumbnail mb-50">
-                        <img src="{% static 'img/bg-img/7.jpg' %}" alt="">
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="big-post-content text-center mb-50">
-                        <a href="#" class="post-tag">Healthy</a>
-                        <a href="#" class="post-title">Friend eggs with ham</a>
-                        <div class="post-meta">
-                            <a href="#" class="post-date">July 11, 2018</a>
-                            <a href="#" class="post-author">By Julia Stiles</a>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique justo id elit bibendum pharetra non vitae lectus. Mauris libero felis, dapibus a ultrices sed, commodo vitae odio. Sed auctor tellus quis arcu tempus, egestas tincidunt augue pellentesque. Suspendisse vestibulum sem in eros maximus, pretium commodo turpis convallis. Aenean scelerisque orci quis urna tempus, vitae interdum velit aliquet.</p>
-                        <a href="#" class="btn bueno-btn">Read More</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Single Big Post Area -->
-            <div class="row align-items-center">
-                <div class="col-12 col-md-6">
-                    <div class="big-post-content text-center mb-50">
-                        <a href="#" class="post-tag">The Best</a>
-                        <a href="#" class="post-title">Steak with boiled vegetables</a>
-                        <div class="post-meta">
-                            <a href="#" class="post-date">July 11, 2018</a>
-                            <a href="#" class="post-author">By Julia Stiles</a>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique justo id elit bibendum pharetra non vitae lectus. Mauris libero felis, dapibus a ultrices sed, commodo vitae odio. Sed auctor tellus quis arcu tempus, egestas tincidunt augue pellentesque. Suspendisse vestibulum sem in eros maximus, pretium commodo turpis convallis. Aenean scelerisque orci quis urna tempus, vitae interdum velit aliquet.</p>
-                        <a href="#" class="btn bueno-btn">Read More</a>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="big-post-thumbnail mb-50">
-                        <img src="{% static 'img/bg-img/8.jpg' %}" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ##### Big Posts Area End ##### -->
-
-    <!-- ##### Posts Area End ##### -->
-    <div class="bueno-post-area mb-70">
-        <div class="container">
-            <div class="row justify-content-center">
-                <!-- Post Area -->
-                <div class="col-12 col-lg-8 col-xl-9">
-                    <!-- Single Blog Post -->
-                    <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <div class="hero-area">
+                <div class="hero-post-slides owl-carousel">
+                    <!-- Single Slide -->
+                    <div class="single-slide">
                         <!-- Blog Thumbnail -->
                         <div class="blog-thumbnail">
-                            <img src="{% static 'img/bg-img/9.jpg' %}" alt="">
+                            <a href="#"><img src="https://splib.sen.go.kr/data/teach/h17/img/1547540967084" alt="" style="
+                                width: 466px;
+                                height: 466px;"></a>
                         </div>
                         <!-- Blog Content -->
-                        <div class="blog-content">
-                            <a href="#" class="post-tag">The Best</a>
-                            <a href="#" class="post-title">Friend eggs with ham</a>
-                            <div class="post-meta">
-                                <a href="#" class="post-date">July 11, 2018</a>
-                                <a href="#" class="post-author">By Julia Stiles</a>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique justo id elit bibendum pharetra non vitae lectus. Mauris libero felis, dapibus a ultrices sed, commodo vitae odio. Sed auctor tellus quis arcu tempus.</p>
-                        </div>
+
                     </div>
 
-                    <!-- Single Blog Post -->
-                    <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+                    <div class="single-slide">
                         <!-- Blog Thumbnail -->
                         <div class="blog-thumbnail">
-                            <img src="{% static 'img/bg-img/10.jpg' %}" alt="">
+                            <a href="#"><img src="https://splib.sen.go.kr/data/teach/h17/img/1549617897860" alt="" style="
+                                width: 466px;
+                                height: 466px;"></a>
                         </div>
                         <!-- Blog Content -->
-                        <div class="blog-content">
-                            <a href="#" class="post-tag">The Best</a>
-                            <a href="#" class="post-title">Mushrooms with pork chop</a>
-                            <div class="post-meta">
-                                <a href="#" class="post-date">July 11, 2018</a>
-                                <a href="#" class="post-author">By Julia Stiles</a>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique justo id elit bibendum pharetra non vitae lectus. Mauris libero felis, dapibus a ultrices sed, commodo vitae odio. Sed auctor tellus quis arcu tempus.</p>
-                        </div>
+     
                     </div>
 
-                    <!-- Single Blog Post -->
-                    <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+
+                    <div class="single-slide">
                         <!-- Blog Thumbnail -->
                         <div class="blog-thumbnail">
-                            <img src="{% static 'img/bg-img/11.jpg' %}" alt="">
+                            <a href="#"><img src="https://splib.sen.go.kr/data/teach/h17/img/1547083552536" alt="" style="
+                                width: 466px;
+                                height: 466px;"></a>
                         </div>
                         <!-- Blog Content -->
-                        <div class="blog-content">
-                            <a href="#" class="post-tag">The Best</a>
-                            <a href="#" class="post-title">Birthday cake with chocolate</a>
-                            <div class="post-meta">
-                                <a href="#" class="post-date">July 11, 2018</a>
-                                <a href="#" class="post-author">By Julia Stiles</a>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique justo id elit bibendum pharetra non vitae lectus. Mauris libero felis, dapibus a ultrices sed, commodo vitae odio. Sed auctor tellus quis arcu tempus.</p>
-                        </div>
                     </div>
-                </div>
 
-                <!-- Sidebar Area -->
-                <div class="col-12 col-sm-9 col-md-6 col-lg-4 col-xl-3">
-                    <div class="sidebar-area">
-
-                        <!-- Single Widget Area -->
-                        <div class="single-widget-area add-widget mb-30">
-                            <img src="{% static 'img/bg-img/add.png' %}" alt="">
+                    <div class="single-slide">
+                        <!-- Blog Thumbnail -->
+                        <div class="blog-thumbnail">
+                            <a href="#"><img src="https://splib.sen.go.kr/data/teach/h17/img/1542774115351" alt="" style="
+                                width: 466px;
+                                height: 466px;"></a>
                         </div>
-
-                        <!-- Single Widget Area -->
-                        <div class="single-widget-area post-widget">
-
-                            <!-- Single Post Area -->
-                            <div class="single-post-area d-flex">
-                                <!-- Blog Thumbnail -->
-                                <div class="blog-thumbnail">
-                                    <img src="{% static 'img/bg-img/12.jpg' %}" alt="">
-                                </div>
-                                <!-- Blog Content -->
-                                <div class="blog-content">
-                                    <a href="#" class="post-title">Friend eggs with ham</a>
-                                    <div class="post-meta">
-                                        <a href="#" class="post-date">July 11, 2018</a>
-                                        <a href="#" class="post-author">By Julia Stiles</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Post Area -->
-                            <div class="single-post-area d-flex mb-30">
-                                <!-- Blog Thumbnail -->
-                                <div class="blog-thumbnail">
-                                    <img src="{% static 'img/bg-img/13.jpg' %}" alt="">
-                                </div>
-                                <!-- Blog Content -->
-                                <div class="blog-content">
-                                    <a href="#" class="post-title">Burger with fries</a>
-                                    <div class="post-meta">
-                                        <a href="#" class="post-date">July 11, 2018</a>
-                                        <a href="#" class="post-author">By Julia Stiles</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Post Area -->
-                            <div class="single-post-area d-flex">
-                                <!-- Blog Thumbnail -->
-                                <div class="blog-thumbnail">
-                                    <img src="{% static 'img/bg-img/14.jpg' %}" alt="">
-                                </div>
-                                <!-- Blog Content -->
-                                <div class="blog-content">
-                                    <a href="#" class="post-title">Avocado &amp; Oisters</a>
-                                    <div class="post-meta">
-                                        <a href="#" class="post-date">July 11, 2018</a>
-                                        <a href="#" class="post-author">By Julia Stiles</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Post Area -->
-                            <div class="single-post-area d-flex">
-                                <!-- Blog Thumbnail -->
-                                <div class="blog-thumbnail">
-                                    <img src="{% static 'img/bg-img/15.jpg' %}" alt="">
-                                </div>
-                                <!-- Blog Content -->
-                                <div class="blog-content">
-                                    <a href="#" class="post-title">Tortilla prawns</a>
-                                    <div class="post-meta">
-                                        <a href="#" class="post-date">July 11, 2018</a>
-                                        <a href="#" class="post-author">By Julia Stiles</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Post Area -->
-                            <div class="single-post-area d-flex">
-                                <!-- Blog Thumbnail -->
-                                <div class="blog-thumbnail">
-                                    <img src="{% static 'img/bg-img/16.jpg' %}" alt="">
-                                </div>
-                                <!-- Blog Content -->
-                                <div class="blog-content">
-                                    <a href="#" class="post-title">Burger with fries</a>
-                                    <div class="post-meta">
-                                        <a href="#" class="post-date">July 11, 2018</a>
-                                        <a href="#" class="post-author">By Julia Stiles</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                        <!-- Blog Content -->
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <!-- ##### Posts Area End ##### -->
+    <!-- ##### meetup Area End ##### -->
 
-    <!-- ##### Instagram Area Start ##### -->
-    <div class="instagram-feed-area d-flex flex-wrap">
-        <!-- Single Instagram -->
-        <div class="single-instagram">
-            <img src="{% static 'img/bg-img/insta1.jpg' %}" alt="">
-            <!-- Image Zoom -->
-            <a href="img/bg-img/insta1.jpg" class="img-zoom" title="Instagram Image">+</a>
-        </div>
 
-        <!-- Single Instagram -->
-        <div class="single-instagram">
-            <img src="{% static 'img/bg-img/insta2.jpg' %}" alt="">
-            <!-- Image Zoom -->
-            <a href="img/bg-img/insta2.jpg" class="img-zoom" title="Instagram Image">+</a>
-        </div>
-
-        <!-- Single Instagram -->
-        <div class="single-instagram">
-            <img src="{% static 'img/bg-img/insta3.jpg' %}" alt="">
-            <!-- Image Zoom -->
-            <a href="img/bg-img/insta3.jpg" class="img-zoom" title="Instagram Image">+</a>
-        </div>
-
-        <!-- Single Instagram -->
-        <div class="single-instagram">
-            <img src="{% static 'img/bg-img/insta4.jpg' %}" alt="">
-            <!-- Image Zoom -->
-            <a href="img/bg-img/insta4.jpg" class="img-zoom" title="Instagram Image">+</a>
-        </div>
-
-        <!-- Single Instagram -->
-        <div class="single-instagram">
-            <img src="{% static 'img/bg-img/insta5.jpg' %}" alt="">
-            <!-- Image Zoom -->
-            <a href="img/bg-img/insta5.jpg" class="img-zoom" title="Instagram Image">+</a>
-        </div>
-
-        <!-- Single Instagram -->
-        <div class="single-instagram">
-            <img src="{% static 'img/bg-img/insta6.jpg' %}" alt="">
-            <!-- Image Zoom -->
-            <a href="{% static 'img/bg-img/insta6.jpg' %}" class="img-zoom" title="Instagram Image">+</a>
-        </div>
-
-        <!-- Single Instagram -->
-        <div class="single-instagram">
-            <img src="{% static 'img/bg-img/insta7.jpg' %}" alt="">
-            <!-- Image Zoom -->
-            <a href="img/bg-img/insta7.jpg" class="img-zoom" title="Instagram Image">+</a>
-        </div>
-
-        <!-- Single Instagram -->
-        <div class="single-instagram">
-            <img src="{% static 'img/bg-img/insta8.jpg' %}" alt="">
-            <!-- Image Zoom -->
-            <a href="img/bg-img/insta8.jpg" class="img-zoom" title="Instagram Image">+</a>
-        </div>
-
-        <!-- Single Instagram -->
-        <div class="single-instagram">
-            <img src="{% static 'img/bg-img/insta9.jpg' %}" alt="">
-            <!-- Image Zoom -->
-            <a href="img/bg-img/insta9.jpg" class="img-zoom" title="Instagram Image">+</a>
-        </div>
-
-        <!-- Single Instagram -->
-        <div class="single-instagram">
-            <img src="{% static 'img/bg-img/insta10.jpg' %}" alt="">
-            <!-- Image Zoom -->
-            <a href="img/bg-img/insta10.jpg" class="img-zoom" title="Instagram Image">+</a>
-        </div>
-    </div>
-    <!-- ##### Instagram Area End ##### -->
-    <div>
-
-        {% for book in object_list %}
-
-        <img src="{{ book.bImage }}}">
-
-        {% endfor %}
-
+        <div></div>
+        <div></div>
+        <div></div>
+ 
 
     </div>
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area">
         <div class="container">
+                <hr>
             <div class="row">
+
                 <div class="col-12 col-sm-5">
                     <!-- Copywrite Text -->
+
                     <p class="copywrite-text"><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> Culture-Planner <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                 </div>
                 <div class="col-12 col-sm-7">
