@@ -1,6 +1,4 @@
 {% load static %}
-{% load widget_tweaks %}
-
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -12,7 +10,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Search - book </title>
+    <title>book-info</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
@@ -20,6 +18,67 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'styles/5star.css' %}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+            body {font-family: "Lato", sans-serif;}
+            
+            .tablink {
+              background-color: rgba(252, 213, 226, 0.842);
+              color: black;
+              float: left;
+              border: none;
+              outline: none;
+              cursor: pointer;
+              padding: 14px 16px;
+              font-size: 17px;
+              width: 25%;
+            }
+            
+            .tablink:hover {
+              background-color: lightgrey;
+            }
+            
+            /* Style the tab content */
+            .tabcontent {
+              color: white;
+              display: none;
+              padding: 50px;
+              text-align: center;
+              text-align: center;
+              border: solid 1px;
+              border-color: lightgray;
+            }
+            
+            #teen {background-color: white;}
+            #twenty {background-color:white;}
+            #thrity {background-color: white;}
+            #forty {background-color:white;}
+            #fifty {background-color:white;}
+
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+</style>
 
 </head>
 
@@ -68,7 +127,7 @@
                         <div class="col-12 col-sm-6 col-lg-5 col-xl-4">
                             <!-- Top Search Area -->
                             <div class="top-search-area">
-                                <form action="" method="get">
+                                <form action="search" method="get">
                                     <input type="search" name="q" id="topSearch" placeholder="Search">
                                     <button type="submit" class="btn"><i class="fa fa-search"></i></button>
                                 </form>
@@ -121,10 +180,10 @@
                                             </ul>
                                         </li>
                                         <li><a href="/community">Community</a></li>
-                                        <li><a href="/aboutus">About us</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
                                         {% if user.is_authenticated %}
                                         <li><a href = "{% url 'mypage:index' %}">My Library</a></li>
-                                        {% endif %} 
+                                        {% endif %}
                                     </ul>
     
                                     <!-- Login/Register -->
@@ -260,105 +319,136 @@
     </div>
     <!-- ##### Treading Post Area End ##### -->
 
+
     <div class="post-catagory section-padding-100">
         <div class="container">
-            <div class="list_search_result">
-                    <form method="get" action="">
-                        <input type="search" class="form-control" name="q">
+            <div class="list_search_result" style="height: 2000px;">
+
+                <button class="tablink" onclick="openCity('teen', this, 'white')" id="defaultOpen" style="width: 222px; border-top:solid 1px lightgray; border-left:solid 1px lightgray;">10대</button>
+                <button class="tablink" onclick="openCity('twenty', this, 'white')" style="width: 222px; border-top:solid 1px lightgray;">20대</button>
+                <button class="tablink" onclick="openCity('thirty', this, 'white')" style="width: 222px; border-top:solid 1px lightgray;">30대</button>
+                <button class="tablink" onclick="openCity('forty', this, 'white')" style="width: 222px; border-top:solid 1px lightgray;">40대</button>
+                <button class="tablink" onclick="openCity('fifty', this, 'white')" style="width: 222px; border-top:solid 1px lightgray; border-right:solid 1px lightgray;">50대</button>
+             
+                <div id="teen" class="tabcontent" style="display: block;padding-bottom: 20px;height: 3850px;"> 
+                    <div class="w3-container w3-teal"></div>
+                    <div class="w3-row-padding w3-margin-top">
+                        {% for t in teen %}
+                        <div class="w3-third">
                         <br>
-                        <input type="submit" class="btn bueno-btn w-100" value="Search">
-                        {% if query %}
-                        <br><br><br>
-                            {% for result in page.object_list %}
-                            {% if result.object.bImage %}
-                            <table class="type_list"  width= 100%;>
-                                <colgroup>
-                                    <col width="150">
-                                    <col width="120">
-                                    <col width="150">
-                                </colgroup>
-                                <tbody>
-                                        <tr>
-                                            <td class="image">
-                                                <div class="cover">
-                                                    <img src="{{ result.object.bImage }}" width="180" height="269" />
-                                                </div>
-                                            </td>
-                                            <td class="detail">
-                                                <div class="title">{{ result.object.bName }}</div>
-                                                <div class="author">{{ result.object.author }}</div>
-                                                <div class="publisher">{{ result.object.publisher }}</div>
-                                                <div class="publication_year">{{ result.object.publication_year }}</div>         
-                                            </td>
-                                            <td class="info">
-                                                <div class="rate">
-                                                    <input type="radio" id="star5" name="rate" value="5" />
-                                                    <label for="star5" title="text">5 stars</label>
-                                                    <input type="radio" id="star4" name="rate" value="4" />
-                                                    <label for="star4" title="text">4 stars</label>
-                                                    <input type="radio" id="star3" name="rate" value="3" />
-                                                    <label for="star3" title="text">3 stars</label>
-                                                    <input type="radio" id="star2" name="rate" value="2" />
-                                                    <label for="star2" title="text">2 stars</label>
-                                                    <input type="radio" id="star1" name="rate" value="1" />
-                                                    <label for="star1" title="text">1 star</label>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                </tbody>
-                            </table>  
-                                <br>
-                                {% endif %}
-                            {% empty %}
-                                <p>No results found.</p>
-                            {% endfor %}
-                
-                            {% if page.has_previous or page.has_next %}
-                                <div>
-                                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                                    |
-                                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+                            <div class="w3-card">
+                                <img src="{{ t.bCode.bImage }}" style="width: 200px;height: 240px;">
+                                <div class="w3-container">
+                                    <h5><b>{{ t.ranking }}위</b></h5>
                                 </div>
-                            {% endif %}
-                        {% else %}
-                            {# Show some example queries to run, maybe query syntax, something else? #}
-                        {% endif %}
-                    </form>
-  
+                            </div>
+                        </div>
+                        {% endfor %} 
+                        </div>
                 </div>
-            </div>
-        </div>
+
 
   
-    
-    
-
-    <!-- ##### Footer Area Start ##### -->
-    <footer class="footer-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-sm-5">
-                    <!-- Copywrite Text -->
-                    <p class="copywrite-text"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                </div>
-                <div class="col-12 col-sm-7">
-                    <!-- Footer Nav -->
-                    <div class="footer-nav">
-                        <ul>
-                            <li class="active"><a href="#">Home</a></li>
-                            <li><a href="#">Recipes</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
+                <div id="twenty" class="tabcontent" style="display: block;padding-bottom: 30px;height: 3850px;">
+                    <div class="w3-container w3-teal"></div>
+                        <div class="w3-row-padding w3-margin-top">
+                        {% for t in twenty %}
+                        <div class="w3-third">
+                            <br>
+                            <div class="w3-card">
+                                <img src="{{ t.bCode.bImage }}" style="width: 200px;height: 240px;">
+                                <div class="w3-container">
+                                    <h5><b>{{ t.ranking }}위</b></h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %} 
                     </div>
                 </div>
-            </div>
-        </div>
-    </footer>
-    <!-- ##### Footer Area Start ##### -->
+               
+
+     
+                <div id="thirty" class="tabcontent" style="display: block; padding-bottom: 30px; height: 3850px;">
+                    <div class="w3-container w3-teal"></div>
+                    <div class="w3-row-padding w3-margin-top">
+                        {% for t in thirty %}
+                        <div class="w3-third">
+                            <br>
+                            <div class="w3-card">
+                                <img src="{{ t.bCode.bImage }}" style="width: 200px;height: 240px;">
+                                <div class="w3-container">
+                                    <h5><b>{{ t.ranking }}위</b></h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %} 
+                    </div>
+                </div>
+
+  
+                <div id="forty" class="tabcontent" style="display: block;padding-bottom: 30px;height: 3850px;">
+                    <div class="w3-container w3-teal"></div>
+                    <div class="w3-row-padding w3-margin-top">
+                        {% for t in forty %}
+                        <div class="w3-third">
+                            <br>
+                            <div class="w3-card">
+                                <img src="{{ t.bCode.bImage }}" style="width: 200px;height: 240px;">
+                                <div class="w3-container">
+                                    <h5><b>{{ t.ranking }}위</b></h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %} 
+                    </div>
+                </div>
+
+    
+                <div id="fifty" class="tabcontent" style="display: block;padding-bottom: 30px;height: 3900px;">
+                    <div class="w3-container w3-teal"></div>
+                    <div class="w3-row-padding w3-margin-top">
+                        {% for t in fifty %}
+                        <div class="w3-third">
+                            <br>
+                            <div class="w3-card">
+                                <img src="{{ t.bCode.bImage }}" style="width: 200px;height: 240px;">
+                                <div class="w3-container">
+                                    <h5><b>{{ t.ranking }}위</b></h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %} 
+                    </div>
+                </div>
+            </div>  
+              
+
+
+                <script>
+                function openCity(cityName,elmnt,color) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].style.backgroundColor = "";
+                }
+                document.getElementById(cityName).style.display = "block";
+                elmnt.style.backgroundColor = color;
+                
+                }
+                // Get the element with id="defaultOpen" and click on it
+                document.getElementById("defaultOpen").click();
+                </script>
+    
+    </div>
+</div>
+
+   
+    
+
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
@@ -371,6 +461,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="{% static 'js/plugins/plugins.js' %}"></script>
     <!-- Active js -->
     <script src="{% static 'js/active.js' %}"></script>
+
 </body>
 
 </html>

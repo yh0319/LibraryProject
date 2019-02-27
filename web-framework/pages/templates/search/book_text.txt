@@ -3,6 +3,3 @@
 {{ object.publisher }}
 {{ object.publication_year }}
 {{ object.classno }}
-{{ object.bCode }}
-{{ object.loanCnt }}
-{{ object.bImage }}
