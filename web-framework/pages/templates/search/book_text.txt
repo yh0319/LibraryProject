@@ -1,0 +1,5 @@
+{{ object.bName }}
+{{ object.author }}
+{{ object.publisher }}
+{{ object.publication_year }}
+{{ object.classno }}

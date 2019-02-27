@@ -1,0 +1,467 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>book-info</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/5star.css' %}">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+            body {font-family: "Lato", sans-serif;}
+            
+            .tablink {
+              background-color: rgba(252, 213, 226, 0.842);
+              color: black;
+              float: left;
+              border: none;
+              outline: none;
+              cursor: pointer;
+              padding: 14px 16px;
+              font-size: 17px;
+              width: 25%;
+            }
+            
+            .tablink:hover {
+              background-color: lightgrey;
+            }
+            
+            /* Style the tab content */
+            .tabcontent {
+              color: white;
+              display: none;
+              padding: 50px;
+              text-align: center;
+              text-align: center;
+              border: solid 1px;
+              border-color: lightgray;
+            }
+            
+            #teen {background-color: white;}
+            #twenty {background-color:white;}
+            #thrity {background-color: white;}
+            #forty {background-color:white;}
+            #fifty {background-color:white;}
+
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+</style>
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="preloader-content">
+            <h3>Cooking in progress..</h3>
+            <div id="cooking">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div id="area">
+                    <div id="sides">
+                        <div id="pan"></div>
+                        <div id="handle"></div>
+                    </div>
+                    <div id="pancake">
+                        <div id="pastry"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+
+            <!-- Top Header Area -->
+            <div class="top-header-area bg-img bg-overlay" style="background-image: url(/static/img/bg-img/header.jpg);">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center justify-content-between">
+                        <div class="col-12 col-sm-6">
+                            <!-- Top Social Info -->
+                            <div class="top-social-info">
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Behance"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-5 col-xl-4">
+                            <!-- Top Search Area -->
+                            <div class="top-search-area">
+                                <form action="search" method="get">
+                                    <input type="search" name="q" id="topSearch" placeholder="Search">
+                                    <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Logo Area -->
+            <div class="logo-area">
+                <a href="/"><h1>Culture Clinic</h1></a>
+                <!--<img src="{% static 'img/core-img/logo.png' %}" alt="">-->
+            </div>
+    
+            <!-- Navbar Area -->
+            <div class="bueno-main-menu" id="sticker">
+                <div class="classy-nav-container breakpoint-off">
+                    <div class="container">
+                        <!-- Menu -->
+                        <nav class="classy-navbar justify-content-between" id="buenoNav">
+    
+                            <!-- Toggler -->
+                            <div id="toggler"><img src="{% static 'img/core-img/toggler.png' %}" alt=""></div>
+    
+                            <!-- Navbar Toggler -->
+                            <div class="classy-navbar-toggler">
+                                <span class="navbarToggler"><span></span><span></span><span></span></span>
+                            </div>
+    
+                            <!-- Menu -->
+                            <div class="classy-menu">
+    
+                                <!-- Close Button -->
+                                <div class="classycloseIcon">
+                                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                                </div>
+    
+                                <!-- Nav Start -->
+                                <div class="classynav">
+                                    <ul>
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="/search">Search</a></li>
+                                        <li><a href="#">Culture</a>
+                                            <ul class="dropdown">
+                                                <li><a href='/book'>book</a></li>
+                                                <li><a href="/movie">movie</a></li>
+                                                <li><a href="single-post.html">travel</a></li>
+    
+                                            </ul>
+                                        </li>
+                                        <li><a href="/community">Community</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                        {% if user.is_authenticated %}
+                                        <li><a href = "{% url 'mypage:index' %}">My Library</a></li>
+                                        {% endif %}
+                                    </ul>
+    
+                                    <!-- Login/Register -->
+                                    <div class="login-area">
+                                            {% if user.is_authenticated %}
+                                             Hi {{ user.username }} &nbsp;&nbsp;
+                                            <a href="{% url 'logout' %}">Log out</a>
+                                            {% else %}
+                                            <a href="{% url 'login' %}">Log In </a>&nbsp;&nbsp;
+                                            <a href="{% url 'signup' %}">Sign Up</a>
+    
+                                            {% endif %}
+                                    </div>
+                                </div>
+                                <!-- Nav End -->
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Treading Post Area Start ##### -->
+    <div class="treading-post-area" id="treadingPost">
+        <div class="close-icon">
+            <i class="fa fa-times"></i>
+        </div>
+
+        <h4>Treading Post</h4>
+
+        <!-- Single Blog Post -->
+        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img src="{% static 'img/bg-img/9.jpg' %}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="#" class="post-tag">The Best</a>
+                <a href="#" class="post-title">Friend eggs with ham</a>
+                <div class="post-meta">
+                    <a href="#" class="post-date">July 11, 2018</a>
+                    <a href="#" class="post-author">By Julia Stiles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Blog Post -->
+        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img src="{% static 'img/bg-img/10.jpg' %}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="#" class="post-tag">The Best</a>
+                <a href="#" class="post-title">Mushrooms with pork chop</a>
+                <div class="post-meta">
+                    <a href="#" class="post-date">July 11, 2018</a>
+                    <a href="#" class="post-author">By Julia Stiles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Blog Post -->
+        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img src="{% static 'img/bg-img/11.jpg' %}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="#" class="post-tag">The Best</a>
+                <a href="#" class="post-title">Birthday cake with chocolate</a>
+                <div class="post-meta">
+                    <a href="#" class="post-date">July 11, 2018</a>
+                    <a href="#" class="post-author">By Julia Stiles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Blog Post -->
+        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img src="{% static 'img/bg-img/9.jpg' %}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="#" class="post-tag">The Best</a>
+                <a href="#" class="post-title">Friend eggs with ham</a>
+                <div class="post-meta">
+                    <a href="#" class="post-date">July 11, 2018</a>
+                    <a href="#" class="post-author">By Julia Stiles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Blog Post -->
+        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img src="{% static 'img/bg-img/10.jpg' %}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="#" class="post-tag">The Best</a>
+                <a href="#" class="post-title">Mushrooms with pork chop</a>
+                <div class="post-meta">
+                    <a href="#" class="post-date">July 11, 2018</a>
+                    <a href="#" class="post-author">By Julia Stiles</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Single Blog Post -->
+        <div class="single-blog-post style-1 d-flex flex-wrap mb-30">
+            <!-- Blog Thumbnail -->
+            <div class="blog-thumbnail">
+                <img src="{% static 'img/bg-img/11.jpg' %}" alt="">
+            </div>
+            <!-- Blog Content -->
+            <div class="blog-content">
+                <a href="#" class="post-tag">The Best</a>
+                <a href="#" class="post-title">Birthday cake with chocolate</a>
+                <div class="post-meta">
+                    <a href="#" class="post-date">July 11, 2018</a>
+                    <a href="#" class="post-author">By Julia Stiles</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Treading Post Area End ##### -->
+
+
+    <div class="post-catagory section-padding-100">
+        <div class="container">
+            <div class="list_search_result" style="height: 2000px;">
+
+                <button class="tablink" onclick="openCity('teen', this, 'white')" id="defaultOpen" style="width: 222px; border-top:solid 1px lightgray; border-left:solid 1px lightgray;">10대</button>
+                <button class="tablink" onclick="openCity('twenty', this, 'white')" style="width: 222px; border-top:solid 1px lightgray;">20대</button>
+                <button class="tablink" onclick="openCity('thirty', this, 'white')" style="width: 222px; border-top:solid 1px lightgray;">30대</button>
+                <button class="tablink" onclick="openCity('forty', this, 'white')" style="width: 222px; border-top:solid 1px lightgray;">40대</button>
+                <button class="tablink" onclick="openCity('fifty', this, 'white')" style="width: 222px; border-top:solid 1px lightgray; border-right:solid 1px lightgray;">50대</button>
+             
+                <div id="teen" class="tabcontent" style="display: block;padding-bottom: 20px;height: 3850px;"> 
+                    <div class="w3-container w3-teal"></div>
+                    <div class="w3-row-padding w3-margin-top">
+                        {% for t in teen %}
+                        <div class="w3-third">
+                        <br>
+                            <div class="w3-card">
+                                <img src="{{ t.bCode.bImage }}" style="width: 200px;height: 240px;">
+                                <div class="w3-container">
+                                    <h5><b>{{ t.ranking }}위</b></h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %} 
+                        </div>
+                </div>
+
+
+  
+                <div id="twenty" class="tabcontent" style="display: block;padding-bottom: 30px;height: 3850px;">
+                    <div class="w3-container w3-teal"></div>
+                        <div class="w3-row-padding w3-margin-top">
+                        {% for t in twenty %}
+                        <div class="w3-third">
+                            <br>
+                            <div class="w3-card">
+                                <img src="{{ t.bCode.bImage }}" style="width: 200px;height: 240px;">
+                                <div class="w3-container">
+                                    <h5><b>{{ t.ranking }}위</b></h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %} 
+                    </div>
+                </div>
+               
+
+     
+                <div id="thirty" class="tabcontent" style="display: block; padding-bottom: 30px; height: 3850px;">
+                    <div class="w3-container w3-teal"></div>
+                    <div class="w3-row-padding w3-margin-top">
+                        {% for t in thirty %}
+                        <div class="w3-third">
+                            <br>
+                            <div class="w3-card">
+                                <img src="{{ t.bCode.bImage }}" style="width: 200px;height: 240px;">
+                                <div class="w3-container">
+                                    <h5><b>{{ t.ranking }}위</b></h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %} 
+                    </div>
+                </div>
+
+  
+                <div id="forty" class="tabcontent" style="display: block;padding-bottom: 30px;height: 3850px;">
+                    <div class="w3-container w3-teal"></div>
+                    <div class="w3-row-padding w3-margin-top">
+                        {% for t in forty %}
+                        <div class="w3-third">
+                            <br>
+                            <div class="w3-card">
+                                <img src="{{ t.bCode.bImage }}" style="width: 200px;height: 240px;">
+                                <div class="w3-container">
+                                    <h5><b>{{ t.ranking }}위</b></h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %} 
+                    </div>
+                </div>
+
+    
+                <div id="fifty" class="tabcontent" style="display: block;padding-bottom: 30px;height: 3900px;">
+                    <div class="w3-container w3-teal"></div>
+                    <div class="w3-row-padding w3-margin-top">
+                        {% for t in fifty %}
+                        <div class="w3-third">
+                            <br>
+                            <div class="w3-card">
+                                <img src="{{ t.bCode.bImage }}" style="width: 200px;height: 240px;">
+                                <div class="w3-container">
+                                    <h5><b>{{ t.ranking }}위</b></h5>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %} 
+                    </div>
+                </div>
+            </div>  
+              
+
+
+                <script>
+                function openCity(cityName,elmnt,color) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].style.backgroundColor = "";
+                }
+                document.getElementById(cityName).style.display = "block";
+                elmnt.style.backgroundColor = color;
+                
+                }
+                // Get the element with id="defaultOpen" and click on it
+                document.getElementById("defaultOpen").click();
+                </script>
+    
+    </div>
+</div>
+
+   
+    
+
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'js/active.js' %}"></script>
+
+</body>
+
+</html>

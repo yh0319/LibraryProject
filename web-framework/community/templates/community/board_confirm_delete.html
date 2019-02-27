@@ -1,0 +1,6 @@
+<h1>Board Delete</h1>
+<form method="post" ction='' enctype="multipart/form-data">
+    {% csrf_token %}
+    Are you sure you want to delete "{{ object }}" ?
+    <input type="submit" value="Submit" />
+</form>

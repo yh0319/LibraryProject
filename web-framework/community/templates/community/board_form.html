@@ -1,0 +1,175 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>NEW</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="{% static 'contact/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'contact/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'contact/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'contact/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'contact/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'contact/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'contact/vendor/animsition/css/animsition.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'contact/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'contact/vendor/daterangepicker/daterangepicker.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'contact/vendor/noui/nouislider.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'contact/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'contact/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+
+
+	<div class="container-contact100">
+		<div class="wrap-contact100">
+			<form method="post" enctype="multipart/form-data" class="contact100-form validate-form">
+				{% csrf_token %}
+				{% if user.is_authenticated %}
+				<span class="contact100-form-title">
+					소모임 등록하기
+				</span>
+
+				<div class="wrap-input100 validate-input bg1" data-validate="Please Type Your Name">
+					<span class="label-input100">FULL NAME *</span>
+					{{ form.user|attr:"class:input100"|attr:"placeholder:개설자 이름" }}
+				</div>
+
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100" data-validate = "Enter Your Email (e@a.x)">
+					<span class="label-input100">Title *</span>
+					{{ form.title|attr:"class:input100"|attr:"placeholder:소모임 주제" }}
+				</div>
+
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100">Date</span>
+					{{ form.date|attr:"class:input100"|attr:"placeholder:소모임 날짜 ex) 2019-03-19" }}
+				</div>
+
+				<div class="wrap-input100 input100-select bg1">
+					<span class="label-input100">Category *</span>
+					{{ form.category|attr:"class:input100"|attr:"placeholder:도서/영화/소모임" }}
+				</div>
+
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100">Place</span>
+					{{ form.place|attr:"class:input100"|attr:"placeholder: 소모임 장소" }}
+				</div>
+
+				<div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+					<span class="label-input100">Entry</span>
+					{{ form.entry|attr:"class:input100"|attr:"placeholder:참가인원 수" }}
+				</div>
+
+				<div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate = "소모임에 대한 간략한 소개를 작성해 주세요..">
+                    <span class="label-input100">Message</span>
+                    {{ form.intro|attr:"class:input100"|attr:"placeholder:간략한 소개를 작송해 주세요"|attr:"name:message" }}
+                </div>
+
+                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+                        <span class="label-input100">Image</span>
+                        {{ form.image|attr:"class:input100"|attr:"placeholder:이미지파일" }}
+                </div>  
+
+				<div class="container-contact100-form-btn">
+					<input type="submit" class="contact100-form-btn">
+				</div>
+            </form>
+          
+			{% else %}
+			<div style="margin:auto; text-align: center;"><b>로그인 후 이용하실 수 있습니다.</b></div>
+			<br>
+			<div style="margin:auto; text-align: center;"><a href="{% url 'login' %}">로그인 하러가기</a></div>
+			{% endif %}
+		</div>
+	</div>
+
+
+
+<!--===============================================================================================-->
+	<script src="{% static 'contact/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'contact/vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'contact/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'contact/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'contact/vendor/select2/select2.min.js' %}"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
+
+
+			$(".js-select2").each(function(){
+				$(this).on('select2:close', function (e){
+					if($(this).val() == "Please chooses") {
+						$('.js-show-service').slideUp();
+					}
+					else {
+						$('.js-show-service').slideUp();
+						$('.js-show-service').slideDown();
+					}
+				});
+			});
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'contact/vendor/daterangepicker/moment.min.js' %}"></script>
+	<script src="{% static 'contact/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'contact/vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'contact/vendor/noui/nouislider.min.js' %}"></script>
+	<script>
+	    var filterBar = document.getElementById('filter-bar');
+
+	    noUiSlider.create(filterBar, {
+	        start: [ 1500, 3900 ],
+	        connect: true,
+	        range: {
+	            'min': 1500,
+	            'max': 7500
+	        }
+	    });
+
+	    var skipValues = [
+	    document.getElementById('value-lower'),
+	    document.getElementById('value-upper')
+	    ];
+
+	    filterBar.noUiSlider.on('update', function( values, handle ) {
+	        skipValues[handle].innerHTML = Math.round(values[handle]);
+	        $('.contact100-form-range-value input[name="from-value"]').val($('#value-lower').html());
+	        $('.contact100-form-range-value input[name="to-value"]').val($('#value-upper').html());
+	    });
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'contact/js/main.js' %}"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>

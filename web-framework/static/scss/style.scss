@@ -178,7 +178,7 @@ img {
 }
 
 .section-padding-100-0 {
-    padding-top: 100px;
+    padding-top: 40px;
     padding-bottom: 0;
 }
 
@@ -774,7 +774,7 @@ h3 {
             }
             .post-title {
                 display: block;
-                font-size: 30px;
+                font-size: 14px;
                 margin-bottom: 30px;
                 @include trans-duration(500ms);
                 @media #{$breakpoint-lg} {

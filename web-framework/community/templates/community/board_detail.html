@@ -1,0 +1,270 @@
+{% load static %}
+<!DOCTYPE html> 
+<html lang="ko-KR">
+<head> 
+    <meta charset="utf-8"/>
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>모임 상세보기</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+    .contents_container1 {
+        float: none;
+        clear: none; 
+        text-align:center;
+    }
+
+    </style>  
+</head>
+
+<body>
+    {% block content %}        
+        <!-- ##### Header Area Start ##### -->
+        <header class="header-area">
+            <!-- Top Header Area -->
+            <div class="top-header-area bg-img bg-overlay" style="background-image: url('{% static 'img/bg-img/header.jpg' %}');">
+                <div class="container h-100">
+                    <div class="row h-100 align-items-center justify-content-between">
+                        <div class="col-12 col-sm-6">
+                            <!-- Top Social Info -->
+                            <div class="top-social-info">
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Behance"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="Linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-5 col-xl-4">
+                            <!-- Top Search Area -->
+                            <div class="top-search-area">
+                                <form action="#" method="post">
+                                    <input type="search" name="top-search" id="topSearch" placeholder="Search">
+                                    <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <div class="logo-area">
+                <a href="/"><h1>Culture Clinic</h1></a>
+            </div>
+        
+            <!-- Navbar Area -->
+            <div class="bueno-main-menu" id="sticker">
+                <div class="classy-nav-container breakpoint-off">
+                    <div class="container">
+                        <!-- Menu -->
+                        <nav class="classy-navbar justify-content-between" id="buenoNav">
+    
+                            <!-- Toggler -->
+                            <div id="toggler"><img src="{% static 'img/core-img/toggler.png' %}" alt=""></div>
+    
+                            <!-- Navbar Toggler -->
+                            <div class="classy-navbar-toggler">
+                                <span class="navbarToggler"><span></span><span></span><span></span></span>
+                            </div>
+    
+                            <!-- Menu -->
+                            <div class="classy-menu">
+    
+                                <!-- Close Button -->
+                                <div class="classycloseIcon">
+                                    <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                                </div>
+    
+                                <!-- Nav Start -->
+                                <div class="classynav">
+                                    <ul>
+                                        <li><a href="/">Home</a></li>
+                                        <li><a href="search">Search</a></li>
+                                        <li><a href="#">Culture</a>
+                                            <ul class="dropdown">
+                                                <li><a href="book">book</a></li>
+                                                <li><a href="movie">movie</a></li>
+                                                <li><a href="single-post.html">travel</a></li>
+    
+                                            </ul>
+                                        </li>
+                                        <li><a href="community">Community</a></li>
+                                        <li><a href="contact.html">About Us</a></li>                       
+                                        {% if user.is_authenticated %}
+                                            <li><a href = "{% url 'mypage:index' %}">My Library</a></li>
+                                        {% endif %}
+                                    </ul>
+                                <!-- Login/Register -->
+                                <div class="login-area">
+                                        {% if user.is_authenticated %}
+                                            Hi {{ user.username }} &nbsp;&nbsp;
+                                            <a href="{% url 'logout' %}">Log out</a>
+                                            {% else %}
+                                            <a href="{% url 'login' %}">Log In </a>&nbsp;&nbsp;
+                                            <a href="{% url 'signup' %}">Sign Up</a>
+                                        {% endif %}
+                                </div>
+                            </div>
+                                <!-- Nav End -->
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- ##### Header Area End ##### -->
+        <div class="contents_container1">
+            <br>
+                <h2 style = "text-align: center">{{ object.title }}</h2>
+                <p style = "text-align:center">{{ object.category }}</p>
+                <br>
+                {% if object.image %}
+                    <img src="{{ object.image.url }}" style="height: 450px;" alt="">
+                {% else %}
+                    <img src="https://images.dailyhive.com/20170403063844/coffee.jpg" style="height: 300px;" alt="">
+                {% endif %}
+                <ul class="list basic_info">
+                    <br>
+                        <li><a href="#"><i class="fa fa-calendar"></i> {{ object.date }}</a></li>
+                        <li><a href="#"><i class="fa fa-heart"></i> {{ object.place }}</a></li>
+                        <li><a href="#"><i class="fa fa-group"></i> {{ object.entry }}</a></li>
+                </ul>
+                <p style = "text-align:center">{{ object.user }}님이 개설한 소모임을 소개합니다</p>
+                
+                <p style = "text-align:center">{{ object.intro }}</p>
+                <br>
+        </div>
+                    <!-- Comment Area Start -->
+                    <div class="comment_area clearfix mb-100" style = "padding-left:220px;padding-right:220px">
+                            <h4 class="mb-50">댓글</h4>
+    
+                            <ol>
+                                <!-- Single Comment Area -->
+                                <li class="single_comment_area">
+                                    <!-- Comment Content -->
+                                    <div class="comment-content d-flex">
+                                        <!-- Comment Author -->
+                                        <div class="comment-author">
+                                            <img src="{% static 'img/bg-img/32.jpg' %}" alt="author">
+                                        </div>
+                                        <!-- Comment Meta -->
+                                        <div class="comment-meta">
+                                            <div class="d-flex">
+                                                <a href="#" class="post-author">Jane Smith</a>
+                                                <a href="#" class="post-date">July 11, 2018</a>
+                                                <a href="#" class="reply">Reply</a>
+                                            </div>
+                                            <p>Consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tinci dunt mi. Nullam vel orci dui. Su spendisse sit amet laoreet neque. Fusce sagittis sus cipit sem a consequat.</p>
+                                        </div>
+                                    </div>
+    
+                                    <ol class="children">
+                                        <li class="single_comment_area">
+                                            <!-- Comment Content -->
+                                            <div class="comment-content d-flex">
+                                                <!-- Comment Author -->
+                                                <div class="comment-author">
+                                                    <img src="{% static 'img/bg-img/33.jpg' %}" alt="author">
+                                                </div>
+                                                <!-- Comment Meta -->
+                                                <div class="comment-meta">
+                                                    <div class="d-flex">
+                                                        <a href="#" class="post-author">Christian Williams</a>
+                                                        <a href="#" class="post-date">April 15, 2018</a>
+                                                        <a href="#" class="reply">Reply</a>
+                                                    </div>
+                                                    <p>Consectetur adipiscing elit. Praesent vel tortor facilisis, Nullam vel orci dui. Su spendisse sit amet laoreet neque.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ol>
+                                </li>
+    
+                                <!-- Single Comment Area -->
+                                <li class="single_comment_area">
+                                    <!-- Comment Content -->
+                                    <div class="comment-content d-flex">
+                                        <!-- Comment Author -->
+                                        <div class="comment-author">
+                                            <img src="{% static 'img/bg-img/32.jpg' %}" alt="author">
+                                        </div>
+                                        <!-- Comment Meta -->
+                                        <div class="comment-meta">
+                                            <div class="d-flex">
+                                                <a href="#" class="post-author">Cris Williams</a>
+                                                <a href="#" class="post-date">July 11, 2018</a>
+                                                <a href="#" class="reply">Reply</a>
+                                            </div>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Su spendisse sit amet laoreet neque. Fusce sagittis suscipit.</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+    
+                        <div class="post-a-comment-area mb-30 clearfix" style = "padding-left:220px;padding-right:220px">
+                            <h4 class="mb-50">모임장에게 물어보기</h4>
+                            <p>모임에 대한 궁금한 점을 모임장에게 남겨보세요!</p>
+                            <!-- Reply Form -->
+                            <div class="contact-form-area">
+                                <form action="#" method="post">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="꼭 참여하고 싶어요!"></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn bueno-btn mt-30" type="submit">댓글 남기기</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+       
+</body>
+{% endblock content %}
+
+<!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-sm-5">
+                        <!-- Copywrite Text -->
+                        <p class="copywrite-text"><a href="#"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    </div>
+                    <div class="col-12 col-sm-7">
+                        <!-- Footer Nav -->
+                        <div class="footer-nav">
+                            <ul>
+                                <li class="active"><a href="#">Home</a></li>
+                                <li><a href="#">Recipes</a></li>
+                                <li><a href="#">About Us</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+<!-- ##### All Javascript Script ##### -->
+<!-- jQuery-2.2.4 js -->
+<script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+<!-- Popper js -->
+<script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+<!-- Bootstrap js -->
+<script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+<!-- All Plugins js -->
+<script src="{% static 'js/plugins/plugins.js' %}"></script>
+<!-- Active js -->
+<script src="{% static 'js/active.js' %}"></script>
